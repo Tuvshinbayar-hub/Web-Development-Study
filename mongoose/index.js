@@ -9,7 +9,6 @@ async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/movieApp');
     // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 
-
     const movieSchema = new mongoose.Schema({
         name: {
             require: true,
@@ -24,10 +23,16 @@ async function main() {
         },
     })
 
+    movieSchema.pre("findOne", async function () {
+        await this.clone().findOneAndUpdate({ score: 7.2 }, { $set: { name: 'it4' } }, { new: true, strict: false }).then(res => console.log("finding has finished"));
+    })
+    movieSchema.post("findOne", async function () {
+        console.log("finished finding");
+    })
+
     movieSchema.virtual("fullName").get(function () {
         return this.name + '' + this.lastName;
     })
-
     movieSchema.virtual("fullName").set(function (name) {
         const split = name.split(' ');
         this.name = split[0];
@@ -36,7 +41,7 @@ async function main() {
 
     const Movie = mongoose.model("Movie", movieSchema);
 
-    Movie.findOne({ score: 7.2 }, { strict: false }).then(res => { console.log(res.) });
+    await Movie.findOne({ score: 7.2 }, { strict: false }).then(res => { console.log(res) });
 
 
     //await Movie.updateMany({}, { $set: { lastName: 'Darmaa' } }, { strict: false });

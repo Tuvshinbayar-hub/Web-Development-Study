@@ -1,0 +1,8 @@
+Middleware also known as post and pre hooks
+
+movieSchema.pre("findOne", async function () {
+        await this.clone().findOneAndUpdate({ score: 7.2 }, { $set: { name: 'it4' } }, { new: true, strict: false }).then(res => console.log("finding has finished"));
+    })
+movieSchema.post("findOne", async function () {
+        console.log("finished finding");
+    })
