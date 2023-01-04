@@ -1,0 +1,70 @@
+Math.floor()
+Math.round()
+Math.pow()
+Math.abs()
+Math.PI
+Math.ceil()
+Math.random()
+
+Math.floor(Math.random()*3) + 20 it gives me a random num between 21...23
+=== strict equality
+!== strict non-equality
+
+console.log()
+alert("hello world") - prints to client not to console
+prompt("please enter a number") - asks a client to type in a new window
+
+parseInt("12") tries to get only num from parameter string
+
+inside our html we should link our js file by <script src="app.js"></script> etc
+
+false values:
+	false, 0, "", null, undefined, NaN
+
+Array methods:
+	push() - add to end
+	pop() - remove from end
+	shift() - remove from start
+	unshift() - add to start
+
+	array1.concat(array2) - gives me concatinated version
+	array1.includes(para1) - return a boolean
+	array1.indexOf(para1) - return an index of specific para.
+	array1.reserve - changes the original array;
+	array1.slice(?para1, ?para2) - its like substring. If the para is negative, it returns form the end;
+	array1.splice - is used to delete a chunk of elements in array and to add elements;
+	array1.sort()
+
+	== and === both compare reference IDs not things inside it
+	
+Property is a bunch of pairs of key and values like dictionary;
+
+for(let item of items) is foreach of JS;
+for(let item in items) is used to iterate throught object;
+
+Object.keys(objectName) gives us keys of the objectName
+Object.values(objectName) gives us values of the objectName
+Object.entries(objectName) gives us nested arrays of key and value;
+
+array.foreach(n){}; foreach is a method in js;
+array.map(n){}; map creates a new copy that array;
+
+array.every((num) => num >10); returns boolean if every elements meets the requirement;
+array.some((num) => num > 10); returns booleans if any element ,meets the requirements, exists;
+
+array.reduce((theTotal, currentNum) => return total + currnetNum, ?initialNum); initialNum is a starting value of theTotal;
+
+function add (x, y=8){		if we call this function add(10) it returns 18. And, we can use add(10,5) then it returns 18; 
+	return x + y;
+}
+
+spread or ... is used to convert const nums = [1,3,2,45,23,12,5,1] to 1,3,2,45,23,12,5,1
+Math.max(nums) //NaN
+Math.max(...nums) //returns the maximum number
+
+to combine 2 arrays we can use
+const array1;
+const array2; then const array3 = [...array1, ...arra2 to combine them 
+
+
+
