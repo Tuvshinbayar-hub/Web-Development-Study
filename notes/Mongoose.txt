@@ -6,3 +6,4 @@ movieSchema.pre("findOne", async function () {
 movieSchema.post("findOne", async function () {
         console.log("finished finding");
     })
+const products = await Product.find().lean(); -lean() method gives me JS object rather than mongoose object. But cannot
