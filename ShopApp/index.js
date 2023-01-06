@@ -18,7 +18,13 @@ async function main() {
 
     app.get('/products', async (req, res) => {
         const products = await Product.find().lean();
-        res.render("products", { products });
+        res.render("./products/products", { products });
+    })
+
+    app.get('/products/:id', async (req, res) => {
+        const id = req.params.id;
+        const product = await Product.findById(id).lean();
+        res.render("./products/details", { product });
     })
 
     app.listen(3000, () => {
