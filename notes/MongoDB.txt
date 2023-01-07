@@ -1,0 +1,26 @@
+MSI - MongoDB Standard Interface
+New-Item -ItemType directory -Path C:\data\db       -use this on powershell to create dir
+ 	db - sends me name my of current database
+ 	show dbs - shows databases;
+	use databaseName - creates or switches database
+BSON - Binary JSON is like JSON but can store better numbers of types of data and much faster.A down side is BSON is not readable by humans;
+	db.collection.insert() is a method of inserting a new value to server;
+	db.collection.find() - shows all the datas of certain collection;
+When a new data is inserted it gets _id by default. But it's possible to change it while inserting;
+	db.collection.find({name: "Buxy"}) gives me all datas containing name: "Buxy";
+	db.animalShelter.updateOne({name: 'Buxy'}, {$set: {name:'Baxy', breed:'Long haired German Shepherd'}, $currentDate: {lastModified: true} })
+first parameter finds the data containing {name: 'Buxy'}
+$set: {name:'Baxy', breed:'Long haired German Shepherd'} changes contents if exit or create new ones;
+$currentDate: {lastModified: true} saves info of modified date;
+	db.animalShelter.replaceOne() changes whole body of chosen data;
+	db.animalShelter.deleteOne()
+$eq - equal
+$gt - greater than
+$gte - greater than or equal to
+$in - valued in specified array
+$lt, $lte - less than or less than equal to
+$ne - not equal
+$nin - none of the values specified
+
+db.dogs.find({age: {$lt:10}}) - finds all objects which have age less than 10;
+

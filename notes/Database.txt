@@ -1,0 +1,1 @@
+SQL- Structured Quary Language - like it's called every data is stored in a pre-defined schema. NoSQL, in contrast, does not have a specific predefined path

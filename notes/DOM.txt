@@ -1,0 +1,56 @@
+document.getElementById("name") gives me object;
+document.getElementsByTag("img") gives me all items with tag "img";
+document.getElementsByClassName("square") gives me all the items with class "square";
+
+document.querySelector("a[title = "Java"]") gives me first a with attribute "title = Java";
+document.querySelectorAll("a[title = "Java"]") gives me HTMLcollection of all matches;
+
+document.querySelector("p").innerText - text that's shown to client
+document.querySelector("s").textContent - text file inside html;
+document.querySelector("p").innerHTML - it changes actual html not dom alone.
+
+There are 2 ways of changing attributes:
+	1. document.querySelector("p").id
+	2. document.querySelector("p").getAttribute("id");
+	3. document.querySelector("p").setAttribute("id", "new value here")
+But the best way to add class is
+	1. document.querySelector("p").classList.add("classNameHere");
+	2. document.querySelector("p").classList.remove("classNameHere");
+	3. document.querySelector("p").classList.contains("classNameHere"); checks if the class is there or not.
+	4. document.querySelector("p").classList.toggle("classNameHere"); toggles the class between true or false;
+
+To get parent:
+	1. document.querySelector("p").parentElement; gives us the parent element;
+To get sibling:
+	1. element.nextElementSibling
+	2. element.previousElementSibling
+To add an element to DOM
+	1. const newIMG = document.createElement("img");
+	2. newIMG.src = "google.mn/somepicture";
+	3. document.body.appendChild(newIMG); add the element as the last child.
+
+	4. document.querySelector("p").append("my new text"); used to append string at the end of string. Also multiple elements can be appended together;
+	5. document.querySelector("p").prepend("something to the beginning"): used to append string to at the start of string;
+	
+	6. element.insertAdjacentElement("afterend", "elementTag");
+	7. h2.after("h1"); inserts h1 after h2 just like method above;
+	8. h2.before("h1"); inserst h1 before h2;
+
+	9. b.parentElement.removeChild("b"); removes b
+	10. b.remove(); removes b but it's much more recent method which does not support IE;
+
+Events:
+	11. element.addEventListener("click", () = {"console.log('Hello! world')", ?{once: true}});
+	12. event objects is automatically passed parameter into a callback function
+	element.addEventListener("click", function(event){console.log(event)});
+	13. event.key is output of keyboard after click. It can vary depending on what language is in usage;
+	14. event.code is actual keyCode of the key. KeyQ , Space etc.
+
+	15. <form action ="/dir" id="myForm"><form>
+	const myForm = document.querySelector("#myForm");
+	myForm.addEventListener("submit", function(e){ e.preventDefault()); Prevents from all the default actions;\
+	16. myForm.addEventListener("change", ()=>console.log("nia nia")); change is called when the change is made and clicked on different element;
+	17. myForm.addEventListener("input", ()=>console.log("called everytime change is made")); calls everytime when change is made;
+	18. if(myForm.value){console.log("write something")};
+	19. event.stopPropagation(); stops the event bubbling effect which calls parents' events;
+	20. element.addEventListener("click", function(e) =>{e.targat.nodeName === "LI" && e.target.remove()});

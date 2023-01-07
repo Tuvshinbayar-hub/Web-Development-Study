@@ -1,0 +1,18 @@
+REST - is an architecture of distributed system. It helps orginize CRUD of many people. Basically, clients can
+Create Remove Update or Delete (CRUD) file from server data. And it's done with different http requests.
+
+GET /comments - list all comments
+POST /comments - Create a new comment
+GET /comments/:id - Get one comment (using ID)
+PATCH /comments/:id - Update one comment
+DELETE /comments/:id - Destroy one comment
+
+
+name		path		verb		purpose
+index		/comments	GET		Display all comments
+new 		/comments/new	GET		Form to create new comment
+Create		/comments	POST		Creates new comment on server
+Show		/comments/:id	GET		Details for one specific comment
+Edit		/comments/:id/edit GET		Form to edit specific comment
+Update		/comments/:id	Patch		Updates specific comment on server
+Destroy		/comments/:id	Delete		Deletes specific item on server

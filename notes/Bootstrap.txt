@@ -1,0 +1,34 @@
+.container is basic element container in bootstrap. It sets width and height of element automatically.
+.container-fluid has no marging on sides. The elements inside takes all spaces from left to right.
+.container-sm acts like .container-fluid when the screen width is less than sm(certain px) if not, it acts like .container
+btn btn-outline-primary btn-lg  is a big outlined button
+blockquote  is text highlighter like quote
+blockquote-footer is cool of notifing who said that quote
+
+Utilities are not stand-alone component but we can add them onto something.
+text-primary sets color of the element to primary color
+bg-light sets background color of the element to light
+text-right can be added to <p></p>
+<span class="badge bagde-seconday"></span> is used to label an element/
+badge-pill makes the background shape like a pill
+.alert
+grid system must in .container. We use class="row". Each rows have 12 units of space. If we're using 2 columns, each of them take up 6 units of space.
+	within our row, we add class="col-sm". Sm stands for small. class="col-8" takes up 8 units of space. if we leave just col, it takes up space automatically.
+.align-items-center can be addd to a row to align its items.
+.form-control can be added to form element automatically gets margin
+.form-label can be added to label element
+
+.border - all sides have border
+.border-0 - meaning it has no border at
+.border.border-primary used to change color
+.rounded - rounds the edges
+.shadow-sm
+.d-none - hides the element
+.d-none .d-sm-block - when the screen size of small or above element is block;
+
+//Not seen examples
+Cards - grid with a lot of different types things in it.
+Carousal - slide of images or sheets
+Spinner - used to visualise something is being awaited
+Modal - pop up window
+

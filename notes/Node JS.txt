@@ -1,0 +1,52 @@
+fs - stands for File system
+const fs = require('fs');
+
+fs.mkdirSync("folderName");
+fs.writeFile("app.js", "data");
+
+	process.argv[2] is way to extract value from input
+
+To use connect scripts(one dependent on other)
+	1. const {value, value1} = require("scriptName");
+	2. but each script controls what to export, we have to explicitly tell otherwise empty object is always exported
+	3. module.exports = math; here math is an object;
+	4. module.exports.PI = PI;
+	   module.exports.sum = (x,y) => x+y;
+	5. exports is short-cut of module.exports but to use we to explicity(one by one exports.PI = PI) export them.
+
+NPM - Node Package Manager - implemental packages written by other of develepors
+
+	1. npm i moduleName - installs a module named moduleName in local folder.
+	2. npm i -g moduleName - -g flag stands for global and it makes the module global access.
+	3. npm link moduleName - links js to globally installed package.
+	4. const module = require("moduleName"); is a way to import the package to js
+	5. npm init - creates package.json file which takes record all the imported module. Later can be used to share.
+		and it should be installed inside root directory
+	6. npm install - at same dir of package.json we can download all the dependencies. Note important to not write anything
+		after install or i
+
+Express - is a framework which creates web server;
+	1. First need to install express
+	2. Inside JS
+		2.1 require("express")
+		2.2 const app = express(); creates top-level app
+		2.3 app.use((req,res)=>{res.send("send info")}) when ever request comes to server this method gets called
+		2.4 app.listening(3000, callback()); starts server. 3000 is port number. And port is endpoint of request.
+
+		2.5 app.get("/naruto", (req,res)=>{ res.send(get request respond)})
+		2.6 app.post("/naruto", (req,res)=>{ res.send(post request respond)})
+		Note: we can put * instead of path, then it responds whenever unknown route comes in.
+
+		2.7 app.get("/r/:question/:id", (req,res) => {
+			const {question, id} = req.params;
+			res.send(question);
+		})
+	3. nodemon is a package which automatically restart the server whenever changes are made.
+RESTful - 
+	1. res.redirect('/comments'); it redirects to '/comments' using GET request really fast after checking if
+if that route exits;
+		
+uuidv4 - universally unique id then just call uuid() to get uuid.
+
+	app.patch and app.put are basically same. Both updates existing file. But app.put replaces chunk of file, in contrast
+app.patch changes portion of the file.

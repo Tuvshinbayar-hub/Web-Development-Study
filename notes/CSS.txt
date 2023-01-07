@@ -1,0 +1,117 @@
+font-weight
+text-decoration
+text-decoration-style for instance wavy
+line-spacing
+letter-spacing
+font-size: 100px
+font-family: 
+
+
+Selectors:
+	Universal *
+	Element Selector button, img, h1, h2, div etc
+	Elements seperated by space means for instance div p means every p inside div is selected
+	ID to change look of certain element we use #name to get access;
+	Class is used to mark different types of elements; .name to get access to it in CSS;
+	Adjacent selector uses combinations of 2 elements to select the second one; like div + a which selects every a written after div\
+	Direct-Descendant selector selects child element of certain element; like div > a which selects child a of div
+	Attribute selecter:
+		Input[type ="text"]
+		Section.post - selects every section with class "post". A class is a attribute;
+	Pseudo class: when element is selected, being hovered over or active gets selected
+			nth-of-type(3n, 2n etc) used to select every 3rd or 2nd element of index; if without n, 3 or 2, selects only 3th or 2nd
+	Pseudo element: selects certain part of element and accessed with ::first-line or ::first-letter ::selected etc
+	Specificity: id > class > element. ID is the most specific element which means it will overwrite others
+	!important declaration is used to mark style as super important.But it should not be used
+	inherit keyword is used to mark elements that don't inherit by default
+
+	Use chrome dev tools to debug css
+	
+Box model - A concept that every elements inside web takes up box shaped spaces.
+	width - width of  the box
+	height - height of the box
+	
+	inorder to display border we must implement border-width, border-color and border-style. Nice to have box-sizing: bordex-box
+	border-left-color is also possible to change only one side of box
+	border-radius is used to make edges round.Nice to use % as units
+	padding - a space between content and border. padding-left and right etc exist.
+	margin - a space between border and other element. margin: top, left, bottom, right can be added at once
+
+	width | style | color - order of creating a border in one line
+	display - it's a property for setting element inline, block or inline-block. Inline elements share their surrounding space with other
+	inline elements. But the block elements do the opposite. Inline-block elements behave like inline elements but their width, height properties
+	are respected.
+
+em is a unit type. But it scales with parent or relative element. For instance, padding is relative to font-size.Then when when font-size
+	changes the padding also changes.But one of the downside is the scale stacks as the element is a child of nested parents.
+rem scale with the most root element not from the direct parent.
+Alpha channel refers only color of that elements, whereas opacity refers the whole element and descendants of that elements. Both change the
+transparency of element.
+
+Position property:
+	1. Static - top, right ,bot and left have no influence if the element is marked as static
+	2. Relative - top, right, bot and left have infuence relative where the element originally was.
+	3. Absolute - it takes the element out from document flow.
+unsplash.com is loyalty free picture downloading site
+
+background-image - "url"; sets background image
+background-size - cover; the image covers background and by default repeats the image if it's small;
+background-position - top; shows topside of the image;
+background: position/size "url"; shorthand of whole background
+calc() - used to calculate mathematical operations
+
+position property:
+	1. Relative - Relative to 
+	2. Absolute - takes up no space in document flow. Relative to its parent.
+	3. Static - top,left,bot,right have no influence. Elements are static by default.
+	4. Fixed - position is fixed relative to html.
+	
+transition property:
+	property | duration | timing function | delay
+
+margin property - has auto keyword which automatically distributes remaining space evenly
+
+transform property:
+	transform-origin : center
+	rotate()
+	translateX , translateY
+	skew - distort the shape into eclipse like shape
+FlexBox - flexible box element which shrinks or expands via screen ratio;
+	flexbox has two axis', main and cross, by default elements align along main axis;
+	flex-direction: row used to change all direction of alignment of elements;
+	flex-direction: row-reverse to change row direction;
+	flex-direction: column;
+	flex-direction: column-reverse;
+
+	justify-content: flex-start; is default justified position
+	justify-content: flex-end; will snap to end of given space
+	justify-content: center; centers content to given space
+	justify-content: space-between; evenly distributes extra space between elements
+	justify-content: space-around; evenly distributes extra space on each sides of elements
+	justify-content: space-evenly; distributes extra space between elements and padding
+	
+	flex-wrap: wrap; wrap the content there is no enough space
+	flex-wrap: wrap-reverse; 
+
+	align-item: flex-start; aligns item along cross-axis;
+	align-item: flex-end;
+	align-content: space-between; controls space between wrapped rows and columns;
+	
+	align-self: center; used to change only one element's property;
+
+//Change button hover color on the pricing panel task;
+	.pricing-tag:focus{} means when the elements is selected
+
+align-self - used to adjust only one element in main or cross elements 
+align-items - used to control how to items along cross behave on their own.
+align-content - used to control all items' space along cross axis.
+
+flex-basis - initial size of item along main axis.It's before space distribution;
+flex-grow - property can be added to single item assigning how the items takes up additional space;
+flex-shrink - property that controls how much the item shrinks when there's not enough space.By default it's 1;
+flex -grow | shrink | basis is order of short hand;
+
+@media (orientation - landscape){} means all css inside curvy braces will be applied then the device's orientation is set to landscape;
+@media (max-width = 500px){} while width is between 0 and 500px css inscie the curvy braces will be applied;
+ 
+Search css reset on google to have same beginning point on all browsers.

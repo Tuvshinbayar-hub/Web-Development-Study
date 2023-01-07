@@ -1,3 +1,63 @@
+ODM - Object Data Mapper
+Mongoose provides ways for us to model out our application data and define a schema. It offers
+easy ways to validate data and build complex queries from the comfort of JS.
+
+In node repl we can use .load index.js to be used and executed within the current node.js
+then call lotr.save() - saves lotr modelled data to mongodb
+
+
+const mongoose = require('mongoose');
+
+main().then(() => {
+    console.log("You've connected")
+}).catch(err => console.log(err));
+
+async function main() {
+    mongoose.set('strictQuery', true);
+    await mongoose.connect('mongodb://127.0.0.1:27017/movieApp');
+
+    // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+}
+
+const movieSchema = new mongoose.Schema({
+    name: String,
+    score: Number,
+    year: Number
+})
+
+const Movie = mongoose.model('Movie', movieSchema); 		-creates new data called "movies"
+const lotr = new Movie({ name: 'Lord of the Rings', score: 9.4, year: 2002 });		-creates new obj
+
+Movie.insertMany([					-model.insertMany() - return promise with parameter of data;
+    { name: 'it', score: 7.6, year: 1998 },
+    { name: 'Grinch', score: 8.5, year: 2006 },
+    { name: 'Naruto', score: 7.5, year: 2016 },
+]).then(data => {
+    console.log("It worked");
+    console.log(data);
+})
+
+Virtuals - used to create variable out of already have info. Like fullname from first and last name;
+
+const movieSchema = new mongoose.Schema({
+        name: String,
+        score: Number,
+        year: Number
+    }, {
+        toObject: {
+            virtuals: true
+        }
+    })
+
+    movieSchema.virtual("fullName").get(function () {
+        return `${this.name} ${this.year}`;
+    })
+
+    movieSchema.virtual("fullName").set(function (movieName) {
+        const split = movieName.split(' ');
+        this.name = split[0];
+        this.year = split[1];
+    })
 Middleware also known as post and pre hooks
 
 movieSchema.pre("findOne", async function () {
@@ -6,4 +66,4 @@ movieSchema.pre("findOne", async function () {
 movieSchema.post("findOne", async function () {
         console.log("finished finding");
     })
-const products = await Product.find().lean(); -lean() method gives me JS object rather than mongoose object. But cannot
+const products = await Product.find().lean(); -lean() method gives me JS object rather than mongoose object. But cannot use methods like find(), updateOne etc;

@@ -1,0 +1,53 @@
+1. npm i express-handlebars
+2. inside ./views/layouts/main.handlebars  we build on top of main.handlebars
+3. inside ./views  we add .handlebars htmls to add on top of main.handlebars
+
+
+const express = require("express");	- setups express
+const exphbs = require("express-handlebars");	- setup for express-handlebars
+const path = require("path");	- is module of NodeJS and it provides us tools like setting up dir
+
+const app = express();		-creating express app
+const { engine } = exphbs;	-decontructed engine() from express-handlebars
+
+app.engine("handlebars", engine());		- setup for engine
+app.set("view engine", "handlebars");		- setup for view engine
+app.set("views", path.join(__dirname, "./views"));	-from wherever we're executing the js, this makes it working
+
+
+Rendering dynamic values with handlebars:
+
+inside JS
+const objectToRender = {name: "naruto", age: 24};
+app.render("home", {objectToRender: objectToRender});
+
+inside handlebars to retreive data from js
+{{objectToRender.name}} is {{objectToRender.age}} years old.
+
+{{#if condition}}
+<h1> Something <h1>
+{{/if}}
+
+Loops
+<ul>
+	{{#each champs}}
+		<li>{{this}}</li>
+	{{/each}}
+</ul>
+Here 'This' word refers to current element in champs array;
+
+serving static assets are used to send css, html to client request;
+
+1. app.use(express.static(path.join(__dirname, "public"))); callback inside use() is called everytime request is sent. This line connects
+public dir to current object
+2. then we can use contents inside public dir. Like using <link rel="stylesheet" href="/app.css">
+
+Partials are reusable template over different htmls
+ 1. We set partial htmls inside seperate folder. It's important to add create this folder inside views folder then all files will be automatically registered
+ 2. {{>partialName}} to include the partial.
+
+Form input notifies local JS if it has certain request handler like. <form action="http://localhost:3000/champs" method="post">
+then inside js we describe app.post("/champs/, (req,res) =>{res.send("Post request from /champs")})
+
+app.use(express.urlencoded({ extended: true })); is used to define req.body file into encoded data;
+npm i method-override. Method-override helps us to send requests like patch, put etc. When html suppors only get and put request in forms;

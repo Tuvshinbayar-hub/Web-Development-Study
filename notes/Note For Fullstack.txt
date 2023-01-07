@@ -1,0 +1,33 @@
+VScode theme - Material theme/extension/ - Palenight high contrast
+MDN - https://developer.mozilla.org/en-US/
+block and inline elements - block is elements aligned vertically, the other is aligned horizontally
+<div></div> - makes generic elements a block
+<span></span> - kind of mark which can be used later for changing all of them at once or to make them look similar.
+<hr> - horizontal rule(line)
+<br> - brake (its like /n)
+<sup> - super script is used to render text levitated
+<sub> - sub script is used to render text below the others
+entity - used to type characters which are not included in keyboard such greater than or less than.
+Syntas, starts with & and end with ; So Example is &lt; is less than
+Semantic markup - meaningful way of writing html for others such as screen reader or developer. 
+	<main></main> - main part of the body, should not include stuffs like navigator etc
+	<section></section> - used to seperate a standalone section of whole html.
+	<article></article> - reusable section of content like weather or application.
+	<aside></aside> - we can use them to mark things like BTW word in ordinary language.
+	<time></time> - specified to indicate time representation.
+	<figure></figure> - could be graph ,pictures or something like to call attention, also could
+	include captions in it.
+<tabel></table> - used to create tabular data.
+<td></td> - a cell of data that contains data. It participates in the table model
+<tr></tr> - a table row
+<th></th> - a table head cell
+<thead rowspan="2"><thead> - rowspan = "2" indicated this takes up 2 rows of space
+<thead colspan="2">
+
+<form></form> - represents a document section containing interactive controls for submitting info
+	action - attribute specifies which where the form data should be sent.
+	method - attribute specifies chich HTTP method should be used.
+name attribute - is identifier of certain element
+value attribute - is value of certain element
+< input= "radio" name = "should be same" id= "id for label" value ="actual value stored in it">
+<blockquote></blockquote> is a element marker that can be used to highligh text file. 

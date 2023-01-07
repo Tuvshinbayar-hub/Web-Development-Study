@@ -1,0 +1,18 @@
+Shell - a programm running on terminal
+~ is called tilde;
+ls - (list) shows all items inside current folder
+pwd - (print working directory) show path of current directory
+cd - (change directory) cd .. to go back 
+	cd / - takes to the root directory
+	cd /c/Users/RuBiNoA - is absolute path
+	cd ../../Pets - back out twice then goes into Pets directory  - is relative path
+clear - to clear
+mkdir folderName - (make directory) creates folder
+
+man ls - gives us manual of ls, for windows ls --help
+ls -s - here "-s" is a flag. It changes how the ls works, also we can combine flags together like "ls -la"
+touch app.js - creates file app.js
+rm app.js - (remove) deletes app.js. But the deleted files does not go to the trash bin
+rmdir naruto - removes a folder named naruto. It only works on empty folders
+rm -rf - (recursive force) removes directory with all contents within
+

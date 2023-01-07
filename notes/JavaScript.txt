@@ -1,0 +1,163 @@
+2**4 is 16
+** is power
+NaN - Not a Number
+let - is a keyword of a variable;
+const - is a keyword of a variable too but not changable;
+in Javascript varialbe's type can be changed at runtime;
+
+isCamelCase
+issnake_case
+
+string[3] is used to get 4th character of the string;
+
+methods:
+	string.indexOf("string");
+	string.slice() is just like .Substring in C#. We can use negative numbers as argument then it starts from back;
+	string.replace("old one that needs to be replaced", "new one")
+	string.repeat(num) string is repeated num times;
+	`I'm ${2022-1998} years old` it's important to use backtick
+
+function expression - is like lambda expression
+const num = function(x,y){
+	return x * y;
+}
+higher order function calls function as an argument and return a function;
+
+const add = (x,y) => {
+	return x + y;
+}
+
+const add = (x,y) => (x+y) is the same as function above
+
+const games = movies.map(movie => (`${movie.name} ${movie.rating}`));
+
+setTimeout(()=>{console.log("I've waited 3 seconds"), 3000}); is function that sets starter timer for another function;
+
+const id = setInterval(()=>{console.log("I'm being called every seconds"), 1000};
+clearInterval(id); is used to stop the infinite loop of interval
+
+const goodMovies = movies.filter(movie => movie.rating > 80); is same as arrow function below;
+const goodMovies = movies.filter(movie => {return movie rating >80});
+
+rest parameter is ... same as spread but
+function sum(...nums){
+	return nums.reduce((total, element) => total + element);
+}
+every function has arguments parameter which refers to all arguments passed into the function;
+
+to destructure an array
+const [first,second, ...restOfArray] = array;
+to destructure a property
+const [name: newNam = "defaultValueIfNotFound"] = fromProperty;
+
+When comes to calling function after second:
+	setTimeOut(
+		()=>{
+		console.log("print something");
+		setTimeOut(()=>console.log("is being called"), 1000);
+		}, 1000)
+
+Call stack - is the way of JS or other programming languages run functions in execution order. It's like the being fundamental
+function calls its dependent function inside it waiting for the result. And the function inside may have another function inside
+, if not the inside functions gives the value, the most fundamental function wants, to outer function. Then the outer function can
+finish its execution;
+
+Promise is used when there are chances of rejection and resolve;
+
+async function returns a Promise by default:
+
+const functionName = async (name)=>{ return "lalalal"};
+
+functionName().then((data) => console.log(`saved is ${data}`)); //prints "saved is lalalal";
+API are already built codes which respond to my request and send me back some data or do some action like send sms to someone;
+
+JSON.parse(data); gives the object of JS;
+JSON.stringify(object); turns object into valid JSON file; undefined becomes null etc;
+
+hoppscotch.io is free tool to make test requests
+
+http status:
+	200 successful
+	300 redirected
+	400 client side error
+	500 server error
+http headers is somekind of keywords for the reqeuests. Each keywords have their own meaning and value behind it. For instance,
+content-type: application/json.
+
+XHR - XMLHttpRequest is original way of sending data request via JS. It's not common anymore. Because it got clunky syntax and
+
+fetch(url)
+	.then((res) =>{
+	return res.json()}                                       res.json() gives us Promise
+	.then((data) => {console.log(data)})})
+	.catch((e) => {console.log(e)};
+
+<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script> is script of axios
+const getPersonInfo = async (i)=>{
+	try{
+	const res = await axios.get("url");
+	return res.data;
+	}
+	catch(e){
+	console.log(e)
+	}
+}
+
+To retrieve data from form element:
+	form.elements.elementName.value;
+
+Array.prototype.sort()
+
+Factory function is a function which has object inside it. The function creates and return objects when called.And it can have
+parameters. The object inside can have function which returns value of operation on the object properties.A downside of factory
+function is each function within object refers to only object specific properties.
+
+//Example FACTORY FUNCTION
+function findTriangle(a, b, c) {
+    const nums = {};
+    nums.a = a;
+    nums.b = b;
+    nums.c = c;
+    nums.perimeter = function () {
+        return this.a + this.b + this.c;
+    }
+    nums.area = function () {
+        return this.a * this.b / 2;
+    }
+    return nums;
+}
+const triangle = findTriangle(1, 2, 3);
+
+Constuctor functions varies from factory function by storing function in prototype of object;
+
+//Example of CONSTRUCTOR FUNCTION
+function Triangle(a, b, c,) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+}
+Triangle.prototype.perimeter = function () {
+    const { a, b, c } = this;
+    return a + b + c;
+}
+const triangle1 = new Triangle(1, 2, 3);
+const triangle2 = new Triangle(2, 3, 4);
+
+CLASS
+
+class Dog
+{
+ constructor(a,b,c)
+	{
+	this.a = a;
+	this.b = b;
+	this.c = c;
+	}
+   sumMethod(){
+	return this.a + this.b + this.c;
+	}
+}
+
+
+class Dog extends Pet{...}      Dog class is inherinting from Pet class;
+
