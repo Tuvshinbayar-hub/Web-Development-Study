@@ -1,0 +1,29 @@
+Epxress middleware is the all functions called after request and before response;
+
+app.use((req, res, next) => {
+  console.log("first call from middleware");
+  return next();
+})
+app.use('/dogs', (req,res, next) => {
+	console.log("I love dogs");
+	next();
+}) when calling requests to /dogs this middleware is called;
+
+app.use('/abc?d', function(req,res,next)){next();}); this will match paths starting with `/abcd` and `/abd`; and varius different
+path validater also exist in expressjs.com;
+
+//Handling 404 route. Use function below after everty requests or right before the app.listen() function to handle the 404;
+app.use((req, res) => {
+	res.status(404).send('Not found!');
+})
+
+
+const verifyPassword = (req, res, next) => {
+  if (req.query.password != "dogo123") {
+    res.send("You need password to enter");
+  } else {
+    next();
+  }
+}
+
+app.get('/campgrounds', verifyPassword, (req, res) =>{...}); verify password gets checked only on this get request
