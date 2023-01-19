@@ -1,13 +1,12 @@
 {{>header}}
 
-<body>
+<div class="container">
     <h1>All Campgrounds</h1>
     <ul>
-        <a href="/campgrounds/new">Create new</a>
         {{#each campgrounds}}
         <li><a href="/campgrounds/{{{this._id}}}">{{this.title}}</a></li>
         {{/each}}
     </ul>
-</body>
+</div>
 
-</html>
+{{>footer}}
