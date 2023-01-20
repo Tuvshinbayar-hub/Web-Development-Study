@@ -4,7 +4,19 @@
     <h1>All Campgrounds</h1>
     <ul>
         {{#each campgrounds}}
-        <li><a href="/campgrounds/{{{this._id}}}">{{this.title}}</a></li>
+        <li>
+            <div class="card">    
+                <div class="row container">
+                    <img src="{{{this.imgUrl}}}" class="col-md-4 img-thumbnail">
+                    <div class="col-md-8">
+                    <div class="fs-2 pb-2">{{this.title}}</div>
+                    <div class="pb-2">{{this.description}}</div>
+                    <div class="text-muted pb-5">{{{this.location}}}</div>
+                    <a href="/campgrounds/{{{this._id}}}" class="btn btn-dark">View {{this.title}}</a>
+                    </div>
+                </div>
+            </div>
+        </li>
         {{/each}}
     </ul>
 </div>
