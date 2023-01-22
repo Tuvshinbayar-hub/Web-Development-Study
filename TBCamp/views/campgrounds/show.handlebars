@@ -1,13 +1,23 @@
 {{>header}}
-<div class=""> 
-    <img src="{{{campground.imgUrl}}}" alt="imgUrl">
-    <h1>{{campground.title}}</h1>
-    <h3>{{campground.location}}</h3>
-    <a href="/campgrounds">Back</a>
-    <a href="/campgrounds/{{{campground._id}}}/edit">Edit</a>
-    <Form action="/campgrounds/{{{campground._id}}}?_method=DELETE" method="POST">
-        <button>DELETE</button>
-    </Form>
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div class="card">
+            <img class="card-img-top" src="{{{campground.imgUrl}}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{campground.title}}</h5>
+                <hr>
+                <p class="card-text">{{campground.description}}</p>
+                <hr>
+                <div class="card-text mb-4">{{campground.price}}$/night</div>
+                <hr>
+                <a href="/campgrounds/{{{campground._id}}}/edit" class="btn btn-primary">Edit</a>
+                <Form class="d-inline" action="/campgrounds/{{{campground._id}}}?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">DELETE</button>
+                </Form>
+            </div>
+        </div>
+    </div>
 </div>
 
 {{>footer}}

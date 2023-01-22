@@ -25,9 +25,14 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 app.use(methodOverride("_method"));
-app.use((req, res, next) => {
-  console.log("first call from middleware");
-  return next();
+// app.use((req, res, next) => {
+//   console.log("first call from middleware");
+//   return next();
+// })
+
+app.use(function (err, req, res, next) {
+  console.log("************ERROR***************");
+  next(err);
 })
 
 mongoose.set("strictQuery", false);
@@ -60,8 +65,7 @@ async function main() {
   });
   app.post("/campgrounds/new", async (req, res) => {
     console.log(req.body.title);
-    const { title, location } = req.body.campground;
-    const campground = new Campground({ title: title, location: location });
+    const campground = new Campground(req.body.campground);
     await campground.save();
     res.redirect("/campgrounds");
   })

@@ -1,9 +1,49 @@
 {{>header}}
 
-<form action="/campgrounds/{{{campground._id}}}/edit?_method=PATCH" method="POST">
-    <label for="title">Title</label>
-    <input type="text" name="campground[title]" id="title" value="{{{campground.title}}}">
-    <label for="location">Location</label>
-    <input type="text" name="campground[location]" id="location" value="{{{campground.location}}}">
-    <button>Edit</button>
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="py-3 text-center fs-5">
+                Create new campground
+            </div>
+            <form action="/campgrounds/{{{campground._id}}}/edit?_method=PATCH" method="POST">
+                <dir class="form-group">
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Title</label>
+                        <input class="form-control" type="text" name="campground[title]" value="{{{campground.title}}}"
+                            id="title">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="location">Location</label>
+                        <input class="form-control" type="text" name="campground[location]"
+                            value="{{{campground.location}}}" id="location">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="imgUrl">Image URL</label>
+                        <input class="form-control" type="text" name="campground[imgUrl]" placeholder="New URL here"
+                            id="imgUrl">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-secondary">$</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
+                            placeholder="0" name="campground[price]" value="{{{campground.price}}}">
+                        <div class="input-group-append">
+                            <span class="input-group-text">.00</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Description</label>
+                        <textarea class="form-control" type="text" name="campground[description]"
+                            id="description">{{campground.description}}</textarea>
+                    </div>
+
+                    <button class="btn btn-dark">Create</button>
+                </dir>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{>footer}}
