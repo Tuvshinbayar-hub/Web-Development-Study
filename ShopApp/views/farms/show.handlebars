@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show</title>
+</head>
+
+<body>
+    <h1>{{farm.name}}</h1>
+    <div>{{farm.city}}</div>
+
+    <h2>Products</h2>
+    <p>
+        {{#each farm.products}}
+        <li><a href="/products/{{{this._id}}}">{{this.name}}</a></li>
+        {{/each}}
+    </p>
+    <p>
+        <br>
+        <a href="http://localhost:3000/farms">All farms</a>
+        <a href="/farms/{{{farm._id}}}/products/new">Create New Product</a>
+        {{!-- <a href="http://localhost:3000/products/{{{product._id}}}/edit">Edit</a> --}}
+    <form action="/farms/{{{farm._id}}}?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
+    </p>
+</body>
+
+</html>

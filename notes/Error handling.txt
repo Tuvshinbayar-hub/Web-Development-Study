@@ -1,0 +1,11 @@
+1. Technically all async errors can be handled when they pass their errors to next(err) as parameter.
+2. Then to reduce number of duplications of coding we can use asyncWrapper(fn)
+const asyncWrapper = (fn) =>{
+	return function(req,res,next){
+		fn(req,res,next).catch(e=>next(e));
+	}
+}
+
+3. Also mongoose has their own error.name can be used for other purposes
+
+4. JOI is a tool for checking data before sending to mongoose;

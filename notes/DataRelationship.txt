@@ -1,0 +1,3 @@
+1. Object itself hold the info.
+2. Parent holds the id of infos.
+3. Child holds the id of parent.

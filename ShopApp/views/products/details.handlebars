@@ -15,11 +15,15 @@
         Price is: {{product.price}}
         <br>
         Category: <a href="http://localhost:3000/products?category={{{product.category}}}">{{product.category}}</a>
+        <br>
+        Farm: <a href="/farms/{{{product.farm._id}}}">{{{product.farm.name}}}</a>
+        <br>
         <a href="http://localhost:3000/products/">All Products</a>
         <a href="http://localhost:3000/products/{{{product._id}}}/edit">Edit</a>
-        <form action="/products/{{{product._id}}}?_method=DELETE" method="POST" >
-            <button>Delete</button>
-        </form>
+    <form action="/products/{{{product._id}}}?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
     </p>
 </body>
+
 </html>

@@ -6,34 +6,49 @@
             <div class="py-3 text-center fs-5">
                 Create new campground
             </div>
-            <form action="/campgrounds/new" method="POST">
+            <form action="/campgrounds/new" class="needs-validation" method="POST" novalidate>
                 <dir class="form-group">
                     <div class="mb-3">
                         <label class="form-label" for="title">Title</label>
-                        <input class="form-control" type="text" name="campground[title]" id="title">
+                        <input class="form-control" type="text" name="campground[title]" id="title" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="location">Location</label>
-                        <input class="form-control" type="text" name="campground[location]" id="location">
+                        <input class="form-control" type="text" name="campground[location]" id="location" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="imgUrl">Image URL</label>
-                        <input class="form-control" type="text" name="campground[imgUrl]" id="imgUrl">
+                        <input class="form-control" type="text" name="campground[imgUrl]" id="imgUrl" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-secondary">$</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
-                            placeholder="0" name="campground[price]">
+                            placeholder="0" name="campground[price]" required>
                         <div class="input-group-append">
                             <span class="input-group-text">.00</span>
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="description">Description</label>
-                        <textarea class="form-control" type="text" name="campground[description]"
-                            id="description"></textarea>
+                        <textarea class="form-control" type="text" name="campground[description]" id="description"
+                            required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
                     </div>
 
                     <button class="btn btn-dark">Create</button>

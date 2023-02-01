@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farms</title>
+</head>
+
+<body>
+    <h2>All Farms</h2>
+    <ul>
+        {{#each farms}}
+        <li>
+            <a href="http://localhost:3000/farms/{{{this._id}}}">{{{this.name}}}</a>
+        </li>
+        {{/each}}
+    </ul>
+    <a href="http://localhost:3000/farms/new">Create New Farm</a>
+    {{!-- {{#if (ne category "all")}}
+    <a href="http://localhost:3000/products/">All products</a>
+    {{/if}} --}}
+</body>
+
+</html>

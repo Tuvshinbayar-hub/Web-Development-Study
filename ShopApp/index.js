@@ -1,10 +1,12 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
-const Product = require("./models/product.js");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+
+const Product = require("./models/product.js");
+const Farm = require("./models/farm");
 
 const app = express();
 
@@ -33,7 +35,7 @@ mongoose.set("strictQuery", false);
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/shopApp");
+  await mongoose.connect("mongodb://127.0.0.1:27017/shopApp2");
 
   //app.engine('handlebars', exphbs.engine());
   const categories = ["fruit", "vegetable", "drink"];
@@ -85,14 +87,64 @@ async function main() {
     console.log("delete is called");
     const { id } = req.params;
     await Product.findByIdAndDelete(id);
-    res.redirect("/products");
+    res.redirect("/farms");
   });
 
   app.get("/products/:id", async (req, res) => {
     const id = req.params.id;
-    const product = await Product.findById(id).lean();
+    const product = await Product.findById(id)
+      .populate('farm').lean();
     res.render("./products/details", { product });
   });
+
+  app.get("/farms", async (req, res) => {
+    const farms = await Farm.find({}).lean();
+    res.render("./farms/index", { farms });
+  })
+
+  app.get('/farms/new', (req, res) => {
+    res.render('./farms/new');
+  })
+
+  app.post("/farms/new", async (req, res) => {
+    const newFarm = new Farm(req.body);
+    await newFarm.save();
+    res.redirect('/farms');
+  })
+
+  app.get('/farms/:id', async (req, res) => {
+    const farm = await Farm.findById(req.params.id)
+      .populate('products').lean();
+    console.log(farm);
+    if (farm)
+      res.render('./farms/show', { farm })
+  })
+
+  app.delete('/farms/:id', async (req, res) => {
+    await Farm.findByIdAndDelete(req.params.id);
+    res.redirect('/farms');
+  })
+
+  app.get('/farms/:id/products/new', async (req, res) => {
+    const { id } = req.params;
+    res.render('./products/new', { categories, id });
+    //const product = new Product(req.body);
+  })
+
+  app.post('/farms/:id/products/new', async (req, res) => {
+    const { id } = req.params;
+    let farm = await Farm.findById(id);
+    const product = new Product(req.body)
+
+    farm.products.push(product);
+    product.farm = farm;
+
+    await farm.save();
+    await product.save();
+
+    farm = await Farm.findById(id).populate('products').lean();
+    res.render('./farms/show', { farm });
+  })
 
   app.listen(3000, () => {
     console.log("port 3000 is connected");
