@@ -27,3 +27,11 @@ const verifyPassword = (req, res, next) => {
 }
 
 app.get('/campgrounds', verifyPassword, (req, res) =>{...}); verify password gets checked only on this get request
+
+inside post middleware we can get data then we'll be able to delete relevant data. For instance:
+farmSchema.post('findOneAndDelete', async (farm)=>{
+    console.log('Post is called');
+    console.log(farm);
+    if(farm.products.length)
+        await Product.deleteMany({_id: {$in: farm.products}});		-$in is used to find all IDs from farm.products array;
+})
