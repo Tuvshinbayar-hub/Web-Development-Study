@@ -1,8 +1,8 @@
 {{>header}}
 
 <div class="row">
-    <div class="col-md-6 offset-3">
-        <div class="card">
+    <div class="col-md-3 offset-3">
+        <div class="card mb-3">
             <img class="card-img-top" src="{{{campground.imgUrl}}}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">{{campground.title}}</h5>
@@ -17,19 +17,38 @@
                 </Form>
             </div>
         </div>
-        <h2>Leave a Review</h2>
-        <form action="">
-            <label for="review"></label>
-            <input type="range" name="review" id="review" min="1" max="5" class="form-range">
 
-            <label class="" for="text"></label>
-            <textarea name="text" class="form-control" id="text" cols="30" rows="5"></textarea>
-
-        </form>
     </div>
 
+    <div class="col-md-3">
+        <h2>Leave a Review</h2>
+        <form action="/campgrounds/{{{campground._id}}}/reviews" class="mb-3 needs-validation" method="POST" novalidate>
+            <label class="form-label" for="rating">Rating</label>
+            <input class="form-range" type="range" name="review[rating]" id="review" min="1" max="5">
+            <div>
+                <label class="form-label" for="text">Review</label>
+                <textarea class="form-control mb-3" name="review[text]" id="text" cols="30" rows="5"
+                    required></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <button class="btn btn-success">Submit</button>
+        </form>
+        {{#each campground.reviews}}
+        <div class="card">
+            <div class="card-body">
+                Rating: {{this.rating}}
+                <br>
+                Review: {{this.text}}
+                <form action="/campgrounds/{{{../campground._id}}}/reviews/{{{this._id}}}?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+        {{/each}}
+
+    </div>
 </div>
-
-
 
 {{>footer}}
