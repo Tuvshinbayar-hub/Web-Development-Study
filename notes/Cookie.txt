@@ -1,0 +1,32 @@
+A Cookie is small amount of information saved by the browser. Usually used to save information of personal preference, info of cards or for tracking info.
+Express does not have cookie-parser by default. So 'cookie-parser' api should be installed seperately.
+We can find cookies for that side by checking application tab in inspection window.
+
+They're 2 types of cookies.
+1. unsigned cookie = anyone can change it after being set.
+2. signed cookie = keeps track of not being changed.If the cookie's been changed it also notifies it.
+
+
+const express = require('express');
+const cookieParser = require('cookie-parser'); 				- as express does not have cookie-parse by default. We've to install it.
+
+const app = express();
+
+app.use(cookieParser('jojo123'));					- it's for setting up secret password for signing. Everyone with that key can change the signed cookie.
+
+app.get('/setCookie', (req, res) => {					- cookie has key and value to save.
+    res.cookie('foo1', 'foo2');
+    res.send('cookie has been set');
+})
+
+app.get('/setsignedcookie', (req, res) => {				
+    res.cookie('signedFoo1', 'singed foo Value', { signed: true });	- {signed: true} marks the cookie as signed.
+    res.send('signed cookie has been set');
+})
+
+app.get('/getsignedcookie', (req, res) => {
+    console.log(req.signedCookies);					- {req.signedCookies} - gets the all signedCookies
+    console.log(req.cookies);						- {req.cookies} - gets all unsigned cookies
+
+    res.send(req.signedCookies);
+})
