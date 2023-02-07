@@ -1,0 +1,2 @@
+A session is a method of saving a small amount of data in RAM, which can be stored on disk with proper persistence 
+mechanisms and later sent to the client as a cookie for data retrieval.
