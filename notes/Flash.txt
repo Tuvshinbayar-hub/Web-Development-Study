@@ -1,0 +1,21 @@
+A flash is used to notify a client that he has done the by showing temporary data.It uses sessions to function.
+
+const flash = require('connect-flash');
+app.use(flash()); then we can use req.flash() method;
+
+Cool way to keep thigs concise is to use middleware:
+app.use((req,res,next)=>{
+	res.locals.messages = flash('newFarm');
+})
+
+app.get('/', (req, res)=>{
+	req.flash('newFarm', 'lorem ipsum jjojo hsould be here');
+	res.redirect('./dir');
+})
+
+app.get('/get', (req,res) =>{
+	res.render('/Jojo', {messages: flash('newFarm')});
+})
+
+
+

@@ -4,7 +4,10 @@ const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const flash = require('connect-flash');
+const session = require('express-session');
 
+const sessionPreferences = { secret: 'holyJojo', resave: false, saveUninitialized: false };
 const Product = require("./models/product.js");
 const Farm = require("./models/farm");
 
@@ -29,8 +32,14 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(session(sessionPreferences));
+app.use(flash());
 
 mongoose.set("strictQuery", false);
+app.use((req, res, next) => {
+  res.locals.messages = req.flash('newFarm');
+  next();
+})
 
 main().catch((err) => console.log(err));
 
@@ -109,6 +118,7 @@ async function main() {
   app.post("/farms/new", async (req, res) => {
     const newFarm = new Farm(req.body);
     await newFarm.save();
+    req.flash('newFarm', 'You have created a new farm');
     res.redirect('/farms');
   })
 
