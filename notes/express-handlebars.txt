@@ -6,6 +6,7 @@
 const express = require("express");	- setups express
 const exphbs = require("express-handlebars");	- setup for express-handlebars
 const path = require("path");	- is module of NodeJS and it provides us tools like setting up dir
+const router = express.Router({mergeParams: true}); - gives access to IDs of general path of route
 
 const app = express();		-creating express app
 const { engine } = exphbs;	-decontructed engine() from express-handlebars
