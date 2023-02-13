@@ -1,5 +1,4 @@
 {{>header}}
-
 <div class="row">
     <div class="col-md-3 offset-3">
         <div class="card mb-3">
@@ -34,6 +33,8 @@
                 </div>
             </div>
             <button class="btn btn-success">Submit</button>
+            {{>flash}}
+
         </form>
         {{#each campground.reviews}}
         <div class="card">

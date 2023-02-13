@@ -6,6 +6,7 @@ const methodOverride = require("method-override");
 const morgan = require("morgan");
 const path = require("path");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 const campgroundRouter = require("./routes/campgrounds");
 const reviewRouter = require("./routes/reviews");
@@ -78,6 +79,12 @@ async function main() {
   //   console.log("Database connected");
   // });
 
+  app.use(flash());
+  app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+  })
 
   app.use('/campgrounds', campgroundRouter);
   app.use('/campgrounds/:id/reviews', reviewRouter);

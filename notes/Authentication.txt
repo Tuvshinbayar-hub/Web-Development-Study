@@ -1,0 +1,15 @@
+bcrypt
+recommended round num is 12;
+
+const bcrypt = require('bcrypt');
+
+
+const hashPw = async (pw) => {
+    const hashedPw = await bcrypt.hash(pw, 12);
+	//result is fixed sized data
+}
+
+const login = async (pw, hashedPW) => {
+    const result = await bcrypt.compare(pw, hashedPW);
+	//result is true or false
+}
