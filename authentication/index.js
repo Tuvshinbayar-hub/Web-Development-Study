@@ -37,6 +37,12 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 
+const requireLogin = (req, res, next) => {
+    if (!req.session.user_id) {
+        return res.redirect('./login');
+    }
+    next();
+}
 
 main().catch(e => console.log(e));
 
@@ -53,12 +59,7 @@ async function main() {
 
     app.post('/register', async (req, res) => {
         const { username, password } = req.body;
-        const hashedPw = await bcrypt.hash(password, 12);
-
-        const user = new User({
-            username,
-            password: hashedPw
-        })
+        const user = new User({ username, password })
 
         await user.save();
         res.redirect('/');
@@ -69,19 +70,12 @@ async function main() {
 
     app.post('/login', async (req, res) => {
         const { username, password } = req.body;
-        const userToCheck = await User.findOne({ username: username });
-        if (userToCheck) {
-            const isValid = await bcrypt.compare(password, userToCheck.password)
-
-            console.log(isValid)
-            if (isValid) {
-                req.session.user_id = userToCheck._id;
-                res.render('./secret');
-            } else {
-                res.send('Name or pass wrong');
-            }
+        const validUser = await User.findAndValidatePassword(username, password);
+        if (validUser) {
+            req.session.user_id = validUser._id;
+            res.render('./secret');
         } else {
-            res.send('user not found');
+            res.send('Name or pass wrong');
         }
     });
 
@@ -95,6 +89,10 @@ async function main() {
     app.post('/secret', (req, res) => {
         req.session.user_id = null;
         res.render('./login');
+    })
+
+    app.get('/topSecret', requireLogin, (req, res) => {
+        res.send('Top Secret!');
     })
 
     app.listen(3000, () => {
