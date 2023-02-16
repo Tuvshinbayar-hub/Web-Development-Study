@@ -1,0 +1,11 @@
+Passport - has a lot of automatic setups for us including salt, hashing functions etc
+
+npm i passport passport-local passport-local-mongoose
+
+Setup below should be after app.use(session(sessionConfig));
+app.use(passport.initialize());		- initializes the passport for express app;
+app.use(passport.session());		- as all the authenticating process requires session it also set it up;
+passport.use(new LocalStrategy(User.authenticate())); 	-passport is using LocalStrategy(passport-local) with authenticating setup of passport-local-mongoose
+
+passport.serializeUser(User.serializeUser());		-setup for the way of serializing the passport. Using passport-local-mongoose;
+passport.deserializeUser(User.deserializeUser());

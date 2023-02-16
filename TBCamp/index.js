@@ -7,10 +7,11 @@ const morgan = require("morgan");
 const path = require("path");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require('passport-local');
 
 const campgroundRouter = require("./routes/campgrounds");
 const reviewRouter = require("./routes/reviews");
-
 const ExpressError = require("./utils/expressError");
 const app = express();
 
@@ -39,6 +40,14 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
+//Passport section
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 app.use(methodOverride("_method"));
@@ -47,12 +56,6 @@ app.use(express.static(path.join(__dirname, 'public'), {
     res.set('Content-Type', 'text/javascript');
   }
 }));
-
-// app.use((req, res, next) => {
-//   console.log("first call from middleware");
-//   return next();
-// })
-
 
 app.use(function (err, req, res, next) {
   console.log("************ERROR***************");
