@@ -8,18 +8,27 @@
                 <hr>
                 <p class="card-text">{{campground.description}}</p>
                 <hr>
+                <div class="card-text mb-4 text-muted">submitted by {{campground.author.username}}</div>
+                <hr>
                 <div class="card-text mb-4">{{campground.price}}$/night</div>
+
+                {{#if currentUser}}
+                {{#if (eqAsString campground.author._id currentUser._id)}}
                 <hr>
                 <a href="/campgrounds/{{{campground._id}}}/edit" class="btn btn-primary">Edit</a>
                 <Form class="d-inline" action="/campgrounds/{{{campground._id}}}?_method=DELETE" method="POST">
                     <button class="btn btn-danger">DELETE</button>
                 </Form>
+                {{/if}}
+                {{/if}}
             </div>
         </div>
-
     </div>
 
     <div class="col-md-3">
+        {{>flash}}
+
+        {{#if currentUser}}
         <h2>Leave a Review</h2>
         <form action="/campgrounds/{{{campground._id}}}/reviews" class="mb-3 needs-validation" method="POST" novalidate>
             <label class="form-label" for="rating">Rating</label>
@@ -33,18 +42,26 @@
                 </div>
             </div>
             <button class="btn btn-success">Submit</button>
-            {{>flash}}
-
         </form>
+        {{/if}}
+
         {{#each campground.reviews}}
         <div class="card">
             <div class="card-body">
-                Rating: {{this.rating}}
-                <br>
-                Review: {{this.text}}
+                <div class="mb-1">
+                    Rating: {{this.rating}}
+                </div>
+                <h6 class="card-subtitle mb-2 text-muted">by {{this.author.username}}</h6>
+                <div class="mb-2">
+                    Review: {{this.text}}
+                </div>
+                {{#if ../currentUser}}
+                {{#if (eqAsString this.author._id ../currentUser._id)}}
                 <form action="/campgrounds/{{{../campground._id}}}/reviews/{{{this._id}}}?_method=DELETE" method="POST">
                     <button class="btn btn-sm btn-danger">Delete</button>
                 </form>
+                {{/if}}
+                {{/if}}
             </div>
         </div>
         {{/each}}

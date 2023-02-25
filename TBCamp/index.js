@@ -12,7 +12,10 @@ const LocalStrategy = require('passport-local');
 
 const campgroundRouter = require("./routes/campgrounds");
 const reviewRouter = require("./routes/reviews");
+const userRouter = require('./routes/users');
 const ExpressError = require("./utils/expressError");
+const User = require('./models/user');
+const { type } = require("os");
 const app = express();
 
 app.engine(
@@ -22,11 +25,29 @@ app.engine(
       eq: function (a, b) {
         return a === b;
       },
+      eqAsString: function (a, b) {
+        const temp1 = a.toString();
+        const temp2 = b.toString();
+
+        return temp1 === temp2;
+      }
     },
   })
 );
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("tiny"));
+app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, 'public'), {
+  setHeaders: function (res, path, stat) {
+    res.set('Content-Type', 'text/javascript');
+  }
+}));
+mongoose.set("strictQuery", false);
+
 
 const sessionConfig = {
   secret: 'Mojijojo123',
@@ -40,6 +61,8 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
+app.use(flash());
+
 //Passport section
 app.use(passport.initialize());
 app.use(passport.session());
@@ -48,47 +71,24 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan("tiny"));
-app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, 'public'), {
-  setHeaders: function (res, path, stat) {
-    res.set('Content-Type', 'text/javascript');
-  }
-}));
-
-app.use(function (err, req, res, next) {
-  console.log("************ERROR***************");
-  next(err);
-})
-
-mongoose.set("strictQuery", false);
-// const verifyPassword = (req, res, next) => {
-//   if (req.query.password != "dogo123") {
-//     res.send("You need password to enter");
-//   } else {
-//     next();
-//   }
-// }
-
 main().catch((err) => console.log(err));
 
 async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/tbcamp");
 
-  // const db = mongoose.connection;
-  // db.on("error", console.error.bind(console, "connection error:"));
-  // db.once("open", () => {
-  //   console.log("Database connected");
-  // });
-
-  app.use(flash());
   app.use((req, res, next) => {
+    res.locals.returnTo = req.session.returnTo;
+    if (req.user) {
+      res.locals.currentUser = req.user.toJSON();
+    }
+    //if (res.locals.currentUser)
+    //console.log(req.locals.currentUser);
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
   })
 
+  app.use('/', userRouter);
   app.use('/campgrounds', campgroundRouter);
   app.use('/campgrounds/:id/reviews', reviewRouter);
 

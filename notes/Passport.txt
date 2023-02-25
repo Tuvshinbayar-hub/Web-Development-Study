@@ -9,3 +9,18 @@ passport.use(new LocalStrategy(User.authenticate())); 	-passport is using LocalS
 
 passport.serializeUser(User.serializeUser());		-setup for the way of serializing the passport. Using passport-local-mongoose;
 passport.deserializeUser(User.deserializeUser());
+
+app.post('/login', passport.authenticate('local', {failureFlash: true, failureRedirect: '/login'}), (req,res) => {
+	req.flash('success', 'Welcome back!');
+	req.redirect('/campgrounds');
+})
+
+Here passport.authenticate() - function checks if both the password and the username are correct. 
+
+router.get('/logout', (req, res) => {			- logout route.
+    req.logout((e) => {
+        if (e) return next(e);
+        req.flash('success', 'Logged out');
+        res.redirect('/campgrounds');
+    });
+});

@@ -1,0 +1,29 @@
+{{>header}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            {{>flash}}
+
+            <div class="py-3 text-center fs-5 font-weight-bold">
+                Login
+            </div>
+            <form action="/login" class="needs-validation" method="POST" novalidate>
+                <dir class="form-group">
+                    <label class="form-label" for="username">Username: </label>
+                    <input class="form-control" type="text" name="username" required id="username">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+
+                    <label class="form-label" for="password">Password: </label>
+                    <input class="form-control" type="password" name="password" required id="password">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <button class="btn btn-success mt-3">Login</button>
+                </dir>
+            </form>
+        </div>
+    </div>
+</div>
+{{>footer}}

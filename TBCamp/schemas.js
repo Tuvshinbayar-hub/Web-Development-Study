@@ -4,7 +4,6 @@ const campgroundSchema = Joi.object({
     campground: Joi.object({
         title: Joi.string()
             .min(3)
-            .alphanum()
             .required(),
         imgUrl: Joi.string()
             .required(),

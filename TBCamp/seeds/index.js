@@ -27,6 +27,7 @@ const InitData = () => {
       title: `${sample(descriptors)} ${sample(places)}`,
       location: `${locations[rand].city}, ${locations[rand].state}`,
       imgUrl: "https://source.unsplash.com/random?InTheWoods",
+      author: '63f3b196d6c4ac6c16520b92',
       price: price,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",

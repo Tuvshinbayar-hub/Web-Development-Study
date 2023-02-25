@@ -52,3 +52,7 @@ then inside js we describe app.post("/champs/, (req,res) =>{res.send("Post reque
 
 app.use(express.urlencoded({ extended: true })); is used to define req.body file into encoded data;
 npm i method-override. Method-override helps us to send requests like patch, put etc. When html suppors only get and put request in forms;
+
+
+for error for not getting the id becoz of not being property of the parent can be solved:
+	1. const data = data.toJSON();
