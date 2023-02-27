@@ -6,14 +6,13 @@ const { users } = require('../controllers/users');
 
 const passport = require('passport');
 
-router.get('/register', users.renderRegisterForm);
+router.route('/register')
+    .get(users.renderRegisterForm)
+    .post(asyncWrapper(users.register));
 
-router.post('/register', asyncWrapper(users.register));
-
-router.get('/login', users.renderLoginForm);
-
-router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login', keepSessionInfo: true }), asyncWrapper(users.login))
-
+router.route('/login')
+    .get(users.renderLoginForm)
+    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login', keepSessionInfo: true }), asyncWrapper(users.login));
 router.get('/logout', users.logout);
 
 module.exports = router;

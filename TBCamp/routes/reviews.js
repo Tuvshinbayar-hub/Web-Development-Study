@@ -5,9 +5,9 @@ const { reviews } = require('../controllers/reviews');
 
 const asyncWrapper = require("../utils/asyncWrapper");
 
-router.get("/", asyncWrapper(reviews.renderCampground));
-
-router.post("/", isLoggedIn, validateReview, asyncWrapper(reviews.createReview));
+router.route('/')
+    .get(asyncWrapper(reviews.renderCampground))
+    .post(isLoggedIn, validateReview, asyncWrapper(reviews.createReview));
 
 router.delete("/:reviewId", isLoggedIn, isReviewAuthor, asyncWrapper(reviews.destroyReview));
 
