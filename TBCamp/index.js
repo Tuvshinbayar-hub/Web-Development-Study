@@ -15,7 +15,6 @@ const reviewRouter = require("./routes/reviews");
 const userRouter = require('./routes/users');
 const ExpressError = require("./utils/expressError");
 const User = require('./models/user');
-const { type } = require("os");
 const app = express();
 
 app.engine(
@@ -37,13 +36,20 @@ app.engine(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 app.use(methodOverride("_method"));
+// app.use(express.static(path.join(__dirname, 'public'), {
+//   setHeaders: function (res, path, stat) {
+//     res.set('Content-Type', 'text/javascript');
+//   }
+// }));
+
 app.use(express.static(path.join(__dirname, 'public'), {
   setHeaders: function (res, path, stat) {
-    res.set('Content-Type', 'text/javascript');
+    if (path.endsWith('.js')) {
+      res.set('Content-Type', 'text/javascript');
+    }
   }
 }));
 mongoose.set("strictQuery", false);

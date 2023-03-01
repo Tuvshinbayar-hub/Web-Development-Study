@@ -6,7 +6,8 @@
             <div class="py-3 text-center fs-5">
                 Create new campground
             </div>
-            <form action="/campgrounds/new" class="needs-validation" method="POST" novalidate>
+            <form action="/campgrounds/new" class="needs-validation" method="POST" enctype="multipart/form-data"
+                novalidate>
                 <dir class="form-group">
                     <div class="mb-3">
                         <label class="form-label" for="title">Title</label>
@@ -22,13 +23,17 @@
                             Looks good!
                         </div>
                     </div>
-                    <div class="mb-3">
+
+                    <label for="images">Upload images</label>
+                    <input type="file" id="images" name="images" multiple>
+
+                    {{!-- <div class="mb-3">
                         <label class="form-label" for="imgUrl">Image URL</label>
                         <input class="form-control" type="text" name="campground[imgUrl]" id="imgUrl" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-secondary">$</span>

@@ -11,11 +11,13 @@ const renderNewForm = (req, res) => {
 
 const createCampground = async (req, res, next) => {
     const campground = new Campground(req.body.campground);
-    if (res.locals.currentUser)
-        campground.author = res.locals.currentUser;
-    await campground.save();
-    req.flash('success', 'You have successfully created a new campground!');
-    res.redirect("/campgrounds");
+
+
+    // if (res.locals.currentUser)
+    //     campground.author = res.locals.currentUser;
+    // await campground.save();
+    // req.flash('success', 'You have successfully created a new campground!');
+    // res.redirect("/campgrounds");
 }
 
 const showCampground = async (req, res) => {

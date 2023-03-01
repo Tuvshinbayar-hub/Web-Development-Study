@@ -1,0 +1,2 @@
+enctype="multipart/form-data" - used when uploading multiple files
+<input type="file" id="images" name="images" multiple> - multiple attribute allows to upload multiple files

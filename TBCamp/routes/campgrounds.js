@@ -4,6 +4,7 @@ const asyncWrapper = require("../utils/asyncWrapper");
 const { campgrounds } = require("../controllers/campgrounds");
 const { isLoggedIn, isAuthor, validateCampground } = require('../middleware');
 
+
 router.get("/", asyncWrapper(campgrounds.index));
 
 router.route('/new')
