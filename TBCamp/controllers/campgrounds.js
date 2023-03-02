@@ -10,9 +10,10 @@ const renderNewForm = (req, res) => {
 }
 
 const createCampground = async (req, res, next) => {
-    const campground = new Campground(req.body.campground);
+    console.log(req.files, res.body);
+    res.send('it worked');
 
-
+    //const campground = new Campground(req.body.campground);
     // if (res.locals.currentUser)
     //     campground.author = res.locals.currentUser;
     // await campground.save();
