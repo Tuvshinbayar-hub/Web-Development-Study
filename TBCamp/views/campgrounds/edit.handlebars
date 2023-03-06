@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-md-6 offset-3">
             <div class="py-3 text-center fs-5">
-                Create new campground
+                Edit campground
             </div>
             <form action="/campgrounds/{{{campground._id}}}/edit?_method=PATCH" class="needs-validation" method="POST"
-                novalidate>
+                enctype="multipart/form-data" novalidate>
                 <dir class="form-group">
                     <div class="mb-3">
                         <label class="form-label" for="title">Title</label>
@@ -17,6 +17,7 @@
                             Looks good!
                         </div>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label" for="location">Location</label>
                         <input class="form-control" type="text" name="campground[location]"
@@ -25,14 +26,7 @@
                             Looks good!
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="imgUrl">Image URL</label>
-                        <input class="form-control" type="text" name="campground[imgUrl]" placeholder="New URL here"
-                            id="imgUrl" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
+
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-secondary">$</span>
@@ -47,6 +41,10 @@
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label for="images" class="form-label">Upload image(s)...</label>
+                        <input class="form-control" type="file" id="images" name="images" multiple>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="description">Description</label>
                         <textarea class="form-control" type="text" name="campground[description]"
                             id="description">{{campground.description}}</textarea>
@@ -55,7 +53,16 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-dark">Create</button>
+                    <div class="mb-3">
+                        {{#each campground.imgUrl}}
+                        <input class="form-check-inline" type="checkbox" value="{{{this.fileName}}}"
+                            id="flexCheckDefault" name="deleteImages">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            <img src="{{{this.url}}}" class="img-thumbnail" alt="image{{{@index}}} of campground">
+                            {{/each}}
+                    </div>
+
+                    <button class="btn btn-info">Edit</button>
                 </dir>
             </form>
         </div>

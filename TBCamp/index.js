@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV != "production") {
+  require('dotenv').config();
+}
+console.log(process.env.CLOUDINARY_NAME);
 const express = require("express");
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");

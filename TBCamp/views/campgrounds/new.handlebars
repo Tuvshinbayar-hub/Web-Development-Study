@@ -24,16 +24,6 @@
                         </div>
                     </div>
 
-                    <label for="images">Upload images</label>
-                    <input type="file" id="images" name="images" multiple>
-
-                    {{!-- <div class="mb-3">
-                        <label class="form-label" for="imgUrl">Image URL</label>
-                        <input class="form-control" type="text" name="campground[imgUrl]" id="imgUrl" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div> --}}
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-secondary">$</span>
@@ -46,6 +36,11 @@
                         <div class="valid-feedback">
                             Looks good!
                         </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="images" class="form-label">Add image(s)...</label>
+                        <input class="form-control" type="file" id="images" name="images" multiple>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="description">Description</label>

@@ -26,8 +26,17 @@ const InitData = () => {
     const campground = new Campground({
       title: `${sample(descriptors)} ${sample(places)}`,
       location: `${locations[rand].city}, ${locations[rand].state}`,
-      imgUrl: "https://source.unsplash.com/random?InTheWoods",
-      author: '64002fac766b621b6c6ac794',
+      imgUrl: [
+        {
+          url: 'https://res.cloudinary.com/duvv7hcdu/image/upload/v1677989782/TBCamp/xksgibnzf2ipqpldw9np.jpg',
+          fileName: 'TBCamp/xksgibnzf2ipqpldw9np',
+        },
+        {
+          url: 'https://res.cloudinary.com/duvv7hcdu/image/upload/v1677989782/TBCamp/wuhtrbcz9mnedsbfr4jn.jpg',
+          fileName: 'TBCamp/wuhtrbcz9mnedsbfr4jn',
+        }
+      ],
+      author: '63f3b196d6c4ac6c16520b92',
       price: price,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",

@@ -11,14 +11,18 @@ const renderNewForm = (req, res) => {
 
 const createCampground = async (req, res, next) => {
     console.log(req.files, res.body);
-    res.send('it worked');
+    const files = req.files;
 
-    //const campground = new Campground(req.body.campground);
-    // if (res.locals.currentUser)
-    //     campground.author = res.locals.currentUser;
-    // await campground.save();
-    // req.flash('success', 'You have successfully created a new campground!');
-    // res.redirect("/campgrounds");
+    const campground = new Campground(req.body.campground);
+    const images = files.map(f => ({ url: f.path, fileName: f.filename }));
+    console.log(files);
+    campground.imgUrl = images;
+
+    if (res.locals.currentUser)
+        campground.author = res.locals.currentUser;
+    await campground.save();
+    req.flash('success', 'You have successfully created a new campground!');
+    res.redirect("/campgrounds");
 }
 
 const showCampground = async (req, res) => {
@@ -44,9 +48,24 @@ const renderEditForm = async (req, res) => {
 
 const editCampground = async (req, res) => {
     const id = req.params.id;
-    await Campground.findByIdAndUpdate(id, req.body.campground);
+    const files = req.files;
+    const deleteImages = req.body.deleteImages;
+
+    const images = files.map(f => ({ url: f.path, fileName: f.filename }));
+    const campground = await Campground.findById(id);
+    if (!campground) {
+        req.flash('error', 'Campground not found');
+        return res.redirect(`/campgrounds`);
+    }
+    campground.imgUrl.push(...images);
+
+    if (deleteImages) {
+        await campground.updateOne({ $pull: { imgUrl: { fileName: { $in: deleteImages } } } });
+    }
+
+    campground.save();
     req.flash('success', 'You have successfully edited a campground!')
-    res.redirect("/campgrounds");
+    res.redirect(`/campgrounds/${id}`);
 }
 
 const destroyCampground = async (req, res) => {

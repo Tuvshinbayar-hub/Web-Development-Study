@@ -7,7 +7,37 @@
 <div class="row">
     <div class="col-md-3 offset-3">
         <div class="card mb-3">
-            <img class="card-img-top" src="{{{campground.imgUrl}}}" alt="Card image cap">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
+                <div class="carousel-indicators">
+                    {{#each campground.imgUrl}}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{{@index}}}"
+                        class="active" aria-current="true" aria-label="Slide {{{@index}}}"></button>
+                    {{/each}}
+                </div>
+                {{@index}}
+                <div class="carousel-inner">
+                    {{#each campground.imgUrl}}
+                    <div class="carousel-item {{#if (eq @index 0)}}active{{/if}}">
+                        <img src="{{{this.url}}}" class="d-block w-100" alt="">
+                    </div>
+                    {{/each}}
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            {{!-- <img class="card-img-top" src="" alt="Card image cap"> --}}
+
             <div class="card-body">
                 <h5 class="card-title">{{campground.title}}</h5>
                 <hr>

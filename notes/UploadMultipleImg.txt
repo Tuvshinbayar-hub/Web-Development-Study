@@ -1,2 +1,46 @@
 enctype="multipart/form-data" - used when uploading multiple files
 <input type="file" id="images" name="images" multiple> - multiple attribute allows to upload multiple files
+
+dotenv - npm package is used to store secret keys
+
+if (process.env.NODE_ENV != "production") {		- This line for only development purpose
+  require('dotenv').config();
+}
+console.log(process.env.CLOUDINARY_NAME);		- how to retrieve data from the secret files.
+
+////// inside seperate js file
+const cloudinary = require('cloudinary').v2
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_APIKEY,
+    api_secret: process.env.CLOUDINARY_APISECRETKEY
+})
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'TBCamp',
+        allowedFormat: ['jpeg', 'png', 'jpg'] // supports promises as well
+    },
+});
+
+module.exports = {
+    storage,
+    cloudinary
+}
+/////
+
+in main file
+
+const { storage } = require("../cloudinary/cloudinary");
+const multer = require('multer');
+const upload = multer({ storage })
+
+router.route('/new')
+    .get(isLoggedIn, campgrounds.renderNewForm)
+    .post(upload.array('images'), async (req, res) => {
+        await console.log(req.body, req.files);
+        res.send(req.body);
+    });
