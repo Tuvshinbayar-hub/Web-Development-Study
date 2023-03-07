@@ -56,7 +56,7 @@
                     <div class="mb-3">
                         {{#each campground.imgUrl}}
                         <input class="form-check-inline" type="checkbox" value="{{{this.fileName}}}"
-                            id="flexCheckDefault" name="deleteImages">
+                            id="flexCheckDefault" name="deleteImages[]">
                         <label class="form-check-label" for="flexCheckDefault">
                             <img src="{{{this.url}}}" class="img-thumbnail" alt="image{{{@index}}} of campground">
                             {{/each}}
