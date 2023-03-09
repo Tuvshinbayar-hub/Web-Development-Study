@@ -1,7 +1,6 @@
 if (process.env.NODE_ENV != "production") {
   require('dotenv').config();
 }
-console.log(process.env.CLOUDINARY_NAME);
 const express = require("express");
 const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
@@ -91,8 +90,6 @@ async function main() {
     if (req.user) {
       res.locals.currentUser = req.user.toJSON();
     }
-    //if (res.locals.currentUser)
-    //console.log(req.locals.currentUser);
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();

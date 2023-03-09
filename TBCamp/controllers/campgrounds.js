@@ -1,5 +1,14 @@
 const Campground = require("../models/campground");
 const cloudinary = require("cloudinary").v2;
+const maplibregl = require('maplibre-gl');
+
+const map = new maplibregl.Map({
+    container: 'map',
+    style: 'https://demotiles.maplibre.org/style.json', // stylesheet location
+    center: [-74.5, 40], // starting position [lng, lat]
+    zoom: 9 // starting zoom
+});
+
 
 const index = async (req, res) => {
     const campgrounds = await Campground.find({}).lean();
@@ -11,12 +20,10 @@ const renderNewForm = (req, res) => {
 }
 
 const createCampground = async (req, res, next) => {
-    console.log(req.files, res.body);
     const files = req.files;
 
     const campground = new Campground(req.body.campground);
     const images = files.map(f => ({ url: f.path, fileName: f.filename }));
-    console.log(files);
     campground.imgUrl = images;
 
     if (res.locals.currentUser)
@@ -34,17 +41,18 @@ const showCampground = async (req, res) => {
         req.flash('error', 'Cannot find a campground');
         return res.redirect("/campgrounds");
     }
-    res.render("./campgrounds/show", { campground });
+    res.render("./campgrounds/show", { campground, map });
 }
 
 const renderEditForm = async (req, res) => {
     const id = req.params.id;
-    const campground = await Campground.findById(id).lean();
+    const campground = await Campground.findById(id);
     if (!campground) {
         req.flash('error', 'Cannot find a campground');
         return res.redirect("/campgrounds");
     }
-    res.render("./campgrounds/edit", { campground });
+    console.log(campground.imgUrl)
+    res.render("./campgrounds/edit", { campground: campground.toObject({ virtuals: true }) });
 }
 
 const editCampground = async (req, res) => {
@@ -62,7 +70,7 @@ const editCampground = async (req, res) => {
 
     if (deleteImages) {
         for (let image of deleteImages) {
-            cloudinary.uploader.destroy(image, function (result) { console.log(result) });
+            cloudinary.uploader.destroy(image, function (result) { });
         }
         await campground.updateOne({ $pull: { imgUrl: { fileName: { $in: deleteImages } } } });
     }

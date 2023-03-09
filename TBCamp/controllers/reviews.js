@@ -26,7 +26,6 @@ const destroyReview = async (req, res) => {
     const { id, reviewId } = req.params;
     await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
-    console.log('id is ', id);
 
     req.flash('success', 'Successfully deleted a review');
     res.redirect(`/campgrounds/${id}`);
