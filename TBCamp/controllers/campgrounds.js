@@ -1,14 +1,30 @@
 const Campground = require("../models/campground");
 const cloudinary = require("cloudinary").v2;
-const maplibregl = require('maplibre-gl');
+const MaplibreGeocoder = require('@maplibre/maplibre-gl-geocoder');
 
-const map = new maplibregl.Map({
-    container: 'map',
-    style: 'https://demotiles.maplibre.org/style.json', // stylesheet location
-    center: [-74.5, 40], // starting position [lng, lat]
-    zoom: 9 // starting zoom
-});
+// const configuration = {
+//     query: 'Erdenet, Mongolia',
+//     limit: 1
+// }
+// var Geo = {
+//     forwardGeocode: async (config) => {
+//         const res = await fetch(
+//             `https://api.maptiler.com/geocoding/${encodeURIComponent(config.query)}.json?key=Sxim0MmX1cOFsGNNYJ49`
+//         );
 
+//         return await res.json();
+//     }
+//     //reverseGeocode: async (config) => { /* definition here */ }, // optional reverse geocoding API
+//     //getSuggestions: async (config) => { /* definition here */ } // optional suggestion API
+// };
+
+// const result = Geo.forwardGeocode(configuration).then(x => console.log(x.features[0].geometry));
+//console.log(result);
+
+// Pass in or define a geocoding API that matches the above
+
+
+//const geocoder = new MaplibreGeocoder(Geo, {});
 
 const index = async (req, res) => {
     const campgrounds = await Campground.find({}).lean();
@@ -26,6 +42,27 @@ const createCampground = async (req, res, next) => {
     const images = files.map(f => ({ url: f.path, fileName: f.filename }));
     campground.imgUrl = images;
 
+    console.log('location is ', req.body.campground.location);
+
+    //GeoCoding Section
+    const configuration = {
+        query: req.body.campground.location,
+        limit: 1
+    };
+
+    var Geo = {
+        forwardGeocode: async (config) => {
+            const res = await fetch(
+                `https://api.maptiler.com/geocoding/${encodeURIComponent(config.query)}.json?key=Sxim0MmX1cOFsGNNYJ49`
+            );
+
+            return await res.json();
+        }
+    };
+
+    await Geo.forwardGeocode(configuration).then(res => { campground.location = res.features[0].geometry });
+
+
     if (res.locals.currentUser)
         campground.author = res.locals.currentUser;
     await campground.save();
@@ -41,7 +78,7 @@ const showCampground = async (req, res) => {
         req.flash('error', 'Cannot find a campground');
         return res.redirect("/campgrounds");
     }
-    res.render("./campgrounds/show", { campground, map });
+    res.render("./campgrounds/show", { campground });
 }
 
 const renderEditForm = async (req, res) => {
@@ -84,7 +121,7 @@ const destroyCampground = async (req, res) => {
     const id = req.params.id;
 
     await Campground.findByIdAndDelete(id);
-    req.flash('success', 'You have succesfully deleted a campground');
+    req.flash('success', 'You have successfully deleted a campground');
     res.redirect("/campgrounds");
 }
 
