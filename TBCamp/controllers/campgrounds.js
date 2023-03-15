@@ -59,7 +59,6 @@ const createCampground = async (req, res, next) => {
             return await res.json();
         }
     };
-
     await Geo.forwardGeocode(configuration).then(res => { campground.location = res.features[0].geometry });
 
 
