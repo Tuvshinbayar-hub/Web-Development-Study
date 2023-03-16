@@ -114,7 +114,27 @@
         {{/each}}
 
         <div id='map' style='width: 400px; height: 300px;'></div>
-        <script src="/js/showMap.js"></script>
+        <script>
+            const coordinates = [{{ campground.location.coordinates }}];
+            const key = "Sxim0MmX1cOFsGNNYJ49"
+            var map = new maplibregl.Map({
+                container: 'map',
+                style: `https://api.maptiler.com/maps/streets/style.json?key=${key}`, // stylesheet location
+                center: coordinates, // starting position [lng, lat]
+                zoom: 11 // starting zoom
+            });
+
+            const popup = new maplibregl.Popup({
+                offset: 20,
+            }).setHTML(`<h3>{{{campground.title}}}</h3>`);
+
+            var marker = new maplibregl.Marker()
+                .setLngLat(coordinates)
+                .setPopup(popup)
+                .addTo(map);
+        </script>
+        {{!--
+        <script src="/js/showMap.js"></script> --}}
     </div>
 </div>
 
