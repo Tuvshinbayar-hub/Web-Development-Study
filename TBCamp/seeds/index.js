@@ -36,11 +36,11 @@ const InitData = () => {
           fileName: 'TBCamp/wuhtrbcz9mnedsbfr4jn',
         }
       ],
-      location: {
+      geometry: {
         type: 'Point',
-        coordinates: [ 104.044785015285, 49.027512828591114 ]
+        coordinates: [104.044785015285, 49.027512828591114]
       },
-      author: '64002fac766b621b6c6ac794',
+      author: '63f3b196d6c4ac6c16520b92',
       price: price,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",

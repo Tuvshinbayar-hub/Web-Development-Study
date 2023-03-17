@@ -115,7 +115,7 @@
 
         <div id='map' style='width: 400px; height: 300px;'></div>
         <script>
-            const coordinates = [{{ campground.location.coordinates }}];
+            const coordinates = [{{ campground.geometry.coordinates }}];
             const key = "Sxim0MmX1cOFsGNNYJ49"
             var map = new maplibregl.Map({
                 container: 'map',
@@ -126,7 +126,8 @@
 
             const popup = new maplibregl.Popup({
                 offset: 20,
-            }).setHTML(`<h3>{{{campground.title}}}</h3>`);
+            }).setHTML(`<h3>{{{campground.title}}}</h3><br>
+            <h6>{{{campground.location}}}</h6>`);
 
             var marker = new maplibregl.Marker()
                 .setLngLat(coordinates)

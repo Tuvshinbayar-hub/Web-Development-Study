@@ -57,7 +57,6 @@ app.use(express.static(path.join(__dirname, 'public'), {
 }));
 mongoose.set("strictQuery", false);
 
-
 const sessionConfig = {
   secret: 'Mojijojo123',
   resave: false,
