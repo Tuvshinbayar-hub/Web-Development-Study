@@ -20,7 +20,7 @@ const sample = (arr) => {
 };
 
 const InitData = () => {
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 200; i++) {
     const price = Math.floor(Math.random() * 50) * 10;
     const rand = Math.floor(Math.random() * 1000);
     const campground = new Campground({
@@ -38,7 +38,7 @@ const InitData = () => {
       ],
       geometry: {
         type: 'Point',
-        coordinates: [104.044785015285, 49.027512828591114]
+        coordinates: [locations[rand].longitude, locations[rand].latitude]
       },
       author: '63f3b196d6c4ac6c16520b92',
       price: price,

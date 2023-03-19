@@ -32,6 +32,9 @@ app.engine(
         const temp2 = b.toString();
 
         return temp1 === temp2;
+      },
+      json: function (obj) {
+        return JSON.stringify(obj);
       }
     },
   })

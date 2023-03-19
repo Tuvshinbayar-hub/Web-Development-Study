@@ -21,8 +21,11 @@
         {{/each}}
     </ul>
 </div>
-
-
+{{campgrounds}}
+<script>
+    var tempData = {{{ json campgrounds }}}
+    var campgroundsData = { features: tempData };
+</script>
 
 <script src="/js/clusterMap.js"></script>
 {{>footer}}

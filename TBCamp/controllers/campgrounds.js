@@ -1,34 +1,10 @@
 const Campground = require("../models/campground");
 const cloudinary = require("cloudinary").v2;
-const MaplibreGeocoder = require('@maplibre/maplibre-gl-geocoder');
-
-// const configuration = {
-//     query: 'Erdenet, Mongolia',
-//     limit: 1
-// }
-// var Geo = {
-//     forwardGeocode: async (config) => {
-//         const res = await fetch(
-//             `https://api.maptiler.com/geocoding/${encodeURIComponent(config.query)}.json?key=Sxim0MmX1cOFsGNNYJ49`
-//         );
-
-//         return await res.json();
-//     }
-//     //reverseGeocode: async (config) => { /* definition here */ }, // optional reverse geocoding API
-//     //getSuggestions: async (config) => { /* definition here */ } // optional suggestion API
-// };
-
-// const result = Geo.forwardGeocode(configuration).then(x => console.log(x.features[0].geometry));
-//console.log(result);
-
-// Pass in or define a geocoding API that matches the above
-
-
-//const geocoder = new MaplibreGeocoder(Geo, {});
 
 const index = async (req, res) => {
     const campgrounds = await Campground.find({}).lean();
-    res.render("./campgrounds/index", { campgrounds });
+    const stringCampgrounds = JSON.stringify(campgrounds);
+    res.render("./campgrounds/index", { campgrounds, stringCampgrounds });
 }
 
 const renderNewForm = (req, res) => {
