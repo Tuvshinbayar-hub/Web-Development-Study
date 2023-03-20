@@ -2,9 +2,9 @@ const Campground = require("../models/campground");
 const cloudinary = require("cloudinary").v2;
 
 const index = async (req, res) => {
-    const campgrounds = await Campground.find({}).lean();
-    const stringCampgrounds = JSON.stringify(campgrounds);
-    res.render("./campgrounds/index", { campgrounds, stringCampgrounds });
+    const campgrounds = await Campground.find({}).lean({virtuals: true});
+    //res.send(typeof campgrounds);
+    res.render("./campgrounds/index", { campgrounds});
 }
 
 const renderNewForm = (req, res) => {

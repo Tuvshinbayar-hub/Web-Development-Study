@@ -40,7 +40,9 @@ const InitData = () => {
         type: 'Point',
         coordinates: [locations[rand].longitude, locations[rand].latitude]
       },
-      author: '63f3b196d6c4ac6c16520b92',
+      author: '64002fac766b621b6c6ac794',
+      //64002fac766b621b6c6ac794 is from work
+      //63f3b196d6c4ac6c16520b92 is from home
       price: price,
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",

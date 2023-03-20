@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Review = require('./review');
+const mongooseLeanVirtuals = require('mongoose-lean-virtuals');
 const Schema = mongoose.Schema;
 
 const ImageSchema = new Schema(
@@ -13,7 +14,7 @@ ImageSchema.virtual('thumbnail').get(function () {
   console.log('generating url', this.url);
   return this.url.replace('/upload', '/upload/w_300');
 });
-
+const opts = { toJSON: { virtuals: true } };
 const campgroundSchema = new Schema({
   title: String,
   imgUrl: [ImageSchema],
@@ -42,7 +43,13 @@ const campgroundSchema = new Schema({
       ref: 'Review'
     }
   ]
-});
+}, opts);
+
+campgroundSchema.virtual('properties.popupMarkup').get(function(){
+  return `<a href="/campgrounds/${this._id}">${this.title}</a>`;
+})
+
+campgroundSchema.plugin(mongooseLeanVirtuals);
 
 
 campgroundSchema.post('findOneAndDelete', async (doc) => {
