@@ -35,6 +35,11 @@ app.engine(
       },
       json: function (obj) {
         return JSON.stringify(obj);
+      },
+      section: function (name, options) {
+        if (!this._sections) this._sections = {};
+        this._sections[name] = options.fn(this);
+        return null;
       }
     },
   })
@@ -100,6 +105,10 @@ async function main() {
   app.use('/', userRouter);
   app.use('/campgrounds', campgroundRouter);
   app.use('/campgrounds/:id/reviews', reviewRouter);
+
+  app.get('/', (req, res) => {
+    res.render('home');
+  })
 
   app.all("*", (req, res, next) => {
     next(new ExpressError(404, 'Page not found'));

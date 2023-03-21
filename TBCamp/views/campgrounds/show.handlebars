@@ -57,8 +57,29 @@
         </div>
     </div>
 
+
     <div class="col-md-3">
-        {{>flash}}
+        <div id='map' style='width: 100%; height: 300px;'></div>
+        <script>
+            const coordinates = [{{ campground.geometry.coordinates }}];
+            const key = "Sxim0MmX1cOFsGNNYJ49"
+            var map = new maplibregl.Map({
+                container: 'map',
+                style: `https://api.maptiler.com/maps/streets/style.json?key=${key}`, // stylesheet location
+                center: coordinates, // starting position [lng, lat]
+                zoom: 11 // starting zoom
+            });
+
+            const popup = new maplibregl.Popup({
+                offset: 20,
+            }).setHTML(`<h3>{{{campground.title}}}</h3><br>
+            <h6>{{{campground.location}}}</h6>`);
+
+            var marker = new maplibregl.Marker()
+                .setLngLat(coordinates)
+                .setPopup(popup)
+                .addTo(map);
+        </script>
 
         {{#if currentUser}}
         <h2>Leave a Review</h2>
@@ -91,6 +112,8 @@
         </form>
         {{/if}}
 
+
+
         {{#each campground.reviews}}
         <div class="card">
             <div class="card-body">
@@ -112,28 +135,7 @@
             </div>
         </div>
         {{/each}}
-
-        <div id='map' style='width: 400px; height: 300px;'></div>
-        <script>
-            const coordinates = [{{ campground.geometry.coordinates }}];
-            const key = "Sxim0MmX1cOFsGNNYJ49"
-            var map = new maplibregl.Map({
-                container: 'map',
-                style: `https://api.maptiler.com/maps/streets/style.json?key=${key}`, // stylesheet location
-                center: coordinates, // starting position [lng, lat]
-                zoom: 11 // starting zoom
-            });
-
-            const popup = new maplibregl.Popup({
-                offset: 20,
-            }).setHTML(`<h3>{{{campground.title}}}</h3><br>
-            <h6>{{{campground.location}}}</h6>`);
-
-            var marker = new maplibregl.Marker()
-                .setLngLat(coordinates)
-                .setPopup(popup)
-                .addTo(map);
-        </script>
+        {{>flash}}
         {{!--
         <script src="/js/showMap.js"></script> --}}
     </div>

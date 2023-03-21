@@ -36,11 +36,11 @@ map.on('load', function () {
             'circle-color': [
                 'step',
                 ['get', 'point_count'],
-                '#51bbd6',
+                '#90e0ef',
                 10,
-                '#f1f075',
+                '#0096c7',
                 30,
-                '#f28cb1'
+                '#023e8a'
             ],
             'circle-radius': [
                 'step',
@@ -104,7 +104,7 @@ map.on('load', function () {
     // description HTML from its properties.
     map.on('click', 'unclustered-point', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
-        var {popupMarkup} = e.features[0].properties;
+        var { popupMarkup } = e.features[0].properties;
         // Ensure that if the map is zoomed out such that
         // multiple copies of the feature are visible, the
         // popup appears over the copy being pointed to.
