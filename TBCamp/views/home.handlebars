@@ -2,10 +2,24 @@
 TBCamp
 {{/section}}
 
-<div class="d-flex h-100 text-center text-white bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="cover-container w-100 h-100 p-3 mx-auto ">
         <header class="mb-auto">
-            <div></div>
+            <div class="container-fluid">
+                <div class="navbar-nav">
+                    <div class="navbar-brand">TBCamp</div>
+                    <div></div>
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link" href="/campgrounds">Campgrounds</a>
+                    {{#if currentUser}}
+                    <a class="nav-link" href="/logout">Logout</a>
+
+                    {{else}}
+                    <a class="nav-link" href="/register">Register</a>
+                    <a class="nav-link" href="/login">Login</a>
+                    {{/if}}
+                </div>
+            </div>
         </header>
     </div>
 </div>
