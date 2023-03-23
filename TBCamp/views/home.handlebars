@@ -2,24 +2,45 @@
 TBCamp
 {{/section}}
 
-<div class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="cover-container w-100 h-100 p-3 mx-auto ">
-        <header class="mb-auto">
-            <div class="container-fluid">
-                <div class="navbar-nav">
-                    <div class="navbar-brand">TBCamp</div>
-                    <div></div>
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    <a class="nav-link" href="/campgrounds">Campgrounds</a>
-                    {{#if currentUser}}
-                    <a class="nav-link" href="/logout">Logout</a>
+<link rel="stylesheet" href="/stylesheets/home.css">
 
-                    {{else}}
-                    <a class="nav-link" href="/register">Register</a>
-                    <a class="nav-link" href="/login">Login</a>
-                    {{/if}}
+<div class="w-100 h-100 bg-dark d-flex justify-content-center text-white">
+    <div class="cover-container d-flex flex-column justify-content-between">
+        <div class=" navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <div class="navbar-nav d-flex justify-content-between w-100">
+                    <div class="navbar-brand">TBCamp</div>
+                    <div class="d-flex">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link" href="/campgrounds">Campgrounds</a>
+                        {{#if currentUser}}
+                        <a class="nav-link" href="/logout">Logout</a>
+
+                        {{else}}
+                        <a class="nav-link" href="/register">Register</a>
+                        <a class="nav-link" href="/login">Login</a>
+                        {{/if}}
+                    </div>
                 </div>
             </div>
-        </header>
+        </div>
+        <main class="px-3 d-flex flex-column align-items-center text-center">
+            <h1>TBCamp</h1>
+            <p class="lead text-align">
+                Welcome to TBCamp
+                <br>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod dolorem animi placeat voluptate nihil
+                fugiat,
+                modi vero sunt at obcaecati. Voluptate animi numquam esse ullam deleniti exercitationem excepturi illum
+                debitis.
+            </p>
+            <a href="/campgrounds" class="btn btn-lg btn-secondary fw-bold">
+                Campgrounds</a>
+        </main>
+        <footer class="align-self-center">
+            <p>
+                &copy; 2023 TBCamp
+            </p>
+        </footer>
     </div>
 </div>
