@@ -1,29 +1,37 @@
 {{>header}}
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-3">
+
+<div class="container d-flex justify-content-center align-items-center w-100">
+    <div class="row w-100">
+        <div class="col-6 offset-3 col-xl-4 offset-xl-4 col-xs-10 offset-xs-1">
             {{>flash}}
+            <div class="card shadow">
+                <img src="https://northeastohiofamilyfun.com/wp-content/uploads/2020/05/Campgrounds-in-Ohio.jpg"
+                    class="card-img-top" alt="img of Campground">
+                <div class="card-body">
 
-            <div class="py-3 text-center fs-5 font-weight-bold">
-                Login
+                    <div class="card-title">Login</div>
+                    <form action="/login" class="needs-validation" method="POST" novalidate>
+                        <dir class="form-group p-0">
+                            <label class="form-label" for="username">Username: </label>
+                            <input class="form-control" type="text" name="username" required id="username" autofocus>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+
+                            <label class="form-label" for="password">Password: </label>
+                            <input class="form-control" type="password" name="password" required id="password">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-success mt-3 d-block">Login</button>
+                            </div>
+                        </dir>
+                    </form>
+                </div>
             </div>
-            <form action="/login" class="needs-validation" method="POST" novalidate>
-                <dir class="form-group">
-                    <label class="form-label" for="username">Username: </label>
-                    <input class="form-control" type="text" name="username" required id="username">
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-
-                    <label class="form-label" for="password">Password: </label>
-                    <input class="form-control" type="password" name="password" required id="password">
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <button class="btn btn-success mt-3">Login</button>
-                </dir>
-            </form>
         </div>
     </div>
 </div>
+
 {{>footer}}

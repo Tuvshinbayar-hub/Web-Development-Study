@@ -1,11 +1,14 @@
 const key = "Sxim0MmX1cOFsGNNYJ49";
 var map = new maplibregl.Map({
-    container: 'map',
+    container: 'cluster-map',
     style:
         `https://api.maptiler.com/maps/streets/style.json?key=${key}`,
     center: [-103.59179687498357, 40.66995747013945],
     zoom: 3
 });
+
+const nav = new maplibregl.NavigationControl();
+map.addControl(nav);
 
 map.on('load', function () {
     // Add a new source from our GeoJSON data and

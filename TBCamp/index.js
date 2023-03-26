@@ -12,6 +12,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require('passport-local');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const campgroundRouter = require("./routes/campgrounds");
 const reviewRouter = require("./routes/reviews");
@@ -50,6 +51,12 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 app.use(methodOverride("_method"));
+app.use(
+  mongoSanitize({
+    replaceWith: '_',
+  }),
+);
+
 // app.use(express.static(path.join(__dirname, 'public'), {
 //   setHeaders: function (res, path, stat) {
 //     res.set('Content-Type', 'text/javascript');
@@ -107,6 +114,7 @@ async function main() {
   app.use('/campgrounds/:id/reviews', reviewRouter);
 
   app.get('/', (req, res) => {
+    console.log(req.query);
     res.render('home');
   })
 

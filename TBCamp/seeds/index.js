@@ -28,7 +28,7 @@ const InitData = () => {
       location: `${locations[rand].city}, ${locations[rand].state}`,
       imgUrl: [
         {
-          url: 'https://res.cloudinary.com/duvv7hcdu/image/upload/v1677989782/TBCamp/xksgibnzf2ipqpldw9np.jpg',
+          url: 'https://res.cloudinary.com/duvv7hcdu/image/upload/v1677988958/TBCamp/usndtkwdev2jqqxjdb8h.jpg',
           fileName: 'TBCamp/xksgibnzf2ipqpldw9np',
         },
         {

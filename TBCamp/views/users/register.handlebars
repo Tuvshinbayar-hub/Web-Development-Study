@@ -1,35 +1,35 @@
 {{>header}}
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-3">
-            {{>flash}}
 
-            <div class="py-3 text-center fs-5">
-                Create new account
-            </div>
-            <form action="/register" class="needs-validation" method="POST" novalidate>
-                <dir class="form-group">
-                    <label class="form-label" for="username">Username: </label>
-                    <input class="form-control" type="text" name="user[username]" required id="username">
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-
-                    <label class="form-label" for="password">Password: </label>
-                    <input class="form-control" type="password" name="user[password]" required id="password">
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-
-                    <label class="form-label" for="email">Email: </label>
-                    <input class="form-control" type="email" name="user[email]" required id="email">
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <button class="btn btn-success mt-3">Create!</button>
-                </dir>
-            </form>
+<div class="row">
+    <div class="col-md-4 offset-md-4 col-8 offset-2">
+        {{>flash}}
+        <div class="py-3 text-center fs-5">
+            Create new account
         </div>
+        <form action="/register" class="needs-validation" method="POST" novalidate>
+            <dir class="form-group p-0">
+                <label class="form-label" for="username">Username: </label>
+                <input class="form-control" type="text" name="user[username]" required id="username">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+
+                <label class="form-label" for="password">Password: </label>
+                <input class="form-control" type="password" name="user[password]" required id="password">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+
+                <label class="form-label" for="email">Email: </label>
+                <input class="form-control" type="email" name="user[email]" required id="email">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <button class="btn btn-success mt-3">Create!</button>
+            </dir>
+        </form>
     </div>
 </div>
+
+
 {{>footer}}

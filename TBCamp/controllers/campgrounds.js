@@ -2,9 +2,9 @@ const Campground = require("../models/campground");
 const cloudinary = require("cloudinary").v2;
 
 const index = async (req, res) => {
-    const campgrounds = await Campground.find({}).lean({virtuals: true});
+    const campgrounds = await Campground.find({}).lean({ virtuals: true });
     //res.send(typeof campgrounds);
-    res.render("./campgrounds/index", { campgrounds});
+    res.render("./campgrounds/index", { campgrounds });
 }
 
 const renderNewForm = (req, res) => {
@@ -48,7 +48,7 @@ const createCampground = async (req, res, next) => {
 const showCampground = async (req, res) => {
     const campground = await Campground.findById(req.params.id)
         .populate({ path: 'reviews', populate: { path: 'author' } })
-        .populate('author').lean();
+        .populate('author').lean({ virtuals: true });
     if (!campground) {
         req.flash('error', 'Cannot find a campground');
         return res.redirect("/campgrounds");
