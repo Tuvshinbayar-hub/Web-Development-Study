@@ -8,8 +8,8 @@ var map = new maplibregl.Map({
 
 const popup = new maplibregl.Popup({
     offset: 20,
-}).setHTML(`<h3>{{{campground.title}}}</h3><br>
-            <h6>{{{campground.location}}}</h6>`);
+}).setHTML(`<h4>${title}</h4><br>
+            <p>${locationData}</p>`);
 
 var marker = new maplibregl.Marker()
     .setLngLat(coordinates)

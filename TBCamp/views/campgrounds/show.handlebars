@@ -7,7 +7,6 @@
     <div class="col-md-3 offset-3">
         <div class="card mb-3">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-
                 <div class="carousel-indicators">
                     {{#each campground.imgUrl}}
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{{@index}}}"
@@ -34,7 +33,6 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
             <div class="card-body">
                 <h5 class="card-title">{{campground.title}}</h5>
                 <hr>
@@ -60,7 +58,6 @@
 
     <div class="col-md-3">
         <div id='map'></div>
-
 
         {{#if currentUser}}
         <h2>Leave a Review</h2>
@@ -93,8 +90,6 @@
         </form>
         {{/if}}
 
-
-
         {{#each campground.reviews}}
         <div class="card">
             <div class="card-body">
@@ -120,6 +115,8 @@
 
         <script>
             const coordinates = [{{ campground.geometry.coordinates }}];
+            const title = {{{ json campground.title }}};
+            const locationData = {{{ json campground.location }}};
         </script>
         <script src="/js/showMap.js"></script>
     </div>

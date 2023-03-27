@@ -63,7 +63,6 @@ const renderEditForm = async (req, res) => {
         req.flash('error', 'Cannot find a campground');
         return res.redirect("/campgrounds");
     }
-    console.log(campground.imgUrl)
     res.render("./campgrounds/edit", { campground: campground.toObject({ virtuals: true }) });
 }
 
@@ -71,6 +70,7 @@ const editCampground = async (req, res) => {
     const id = req.params.id;
     const files = req.files;
     const deleteImages = req.body.deleteImages;
+    console.log(req.body);
 
     const images = files.map(f => ({ url: f.path, fileName: f.filename }));
     const campground = await Campground.findById(id);
@@ -78,6 +78,7 @@ const editCampground = async (req, res) => {
         req.flash('error', 'Campground not found');
         return res.redirect(`/campgrounds`);
     }
+
     campground.imgUrl.push(...images);
 
     if (deleteImages) {
@@ -86,7 +87,7 @@ const editCampground = async (req, res) => {
         }
         await campground.updateOne({ $pull: { imgUrl: { fileName: { $in: deleteImages } } } });
     }
-
+    await campground.updateOne(req.body.campground);
     campground.save();
     req.flash('success', 'You have successfully edited a campground!')
     res.redirect(`/campgrounds/${id}`);
