@@ -5,7 +5,9 @@
         <div class="alert alert-danger" role="alert">
             <h4 class="alert-heading">Error </h4>
             <p>{{err.message}} {{err.status}}</p>
+            {{#if (prod)}}
             <p>{{err.stack}}</p>
+            {{/if}}
         </div>
     </div>
 </div>

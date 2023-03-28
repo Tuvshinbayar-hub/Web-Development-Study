@@ -13,6 +13,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 
 const campgroundRouter = require("./routes/campgrounds");
 const reviewRouter = require("./routes/reviews");
@@ -41,6 +42,9 @@ app.engine(
         if (!this._sections) this._sections = {};
         this._sections[name] = options.fn(this);
         return null;
+      },
+      prod: function(){
+        return process.env.NODE_ENV != 'production';
       }
     },
   })
@@ -57,12 +61,6 @@ app.use(
   }),
 );
 
-// app.use(express.static(path.join(__dirname, 'public'), {
-//   setHeaders: function (res, path, stat) {
-//     res.set('Content-Type', 'text/javascript');
-//   }
-// }));
-
 app.use(express.static(path.join(__dirname, 'public'), {
   setHeaders: function (res, path, stat) {
     if (path.endsWith('.js')) {
@@ -77,7 +75,10 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: true,
   cookie: {
+    name: 'sessionID',
     httpOnly: true,
+    //secure: true, For now it's commented 'cause local host is not considered as 
+    //https or http secure. So, it does not work in local host. 
     expires: Date.now() + 1000 * 3600 * 24 * 7,
     maxAge: 1000 * 3600 * 24 * 7
   }
@@ -85,6 +86,12 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  })
+);
 
 //Passport section
 app.use(passport.initialize());
