@@ -14,6 +14,7 @@ const passport = require("passport");
 const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
+const dbUrl = process.env.DB_URL;
 
 const campgroundRouter = require("./routes/campgrounds");
 const reviewRouter = require("./routes/reviews");
@@ -43,7 +44,7 @@ app.engine(
         this._sections[name] = options.fn(this);
         return null;
       },
-      prod: function(){
+      prod: function () {
         return process.env.NODE_ENV != 'production';
       }
     },
@@ -86,9 +87,47 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+
+//Security Section
+const connectSrcUrls = [
+  'https://unpkg.com/',
+  'https://api.maptiler.com/',
+
+];
+const scriptSrcUrls = [
+  'https://unpkg.com/',
+  'https://cdn.jsdelivr.net/',
+];
+const styleSrcUrls = [
+  'https://cdn.jsdelivr.net/',
+  'https://unpkg.com/',
+
+];
+const fontSrcUrls = [];
+
 app.use(
   helmet({
-    contentSecurityPolicy: false,
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: [],
+        connectSrc: ["'self'", ...connectSrcUrls],
+        scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+        styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+        workerSrc: ["'self'", "blob:"],
+        objectSrc: [],
+        imgSrc: [
+          "'self'",
+          "blob:",
+          "data:",
+          "https://res.cloudinary.com/duvv7hcdu/",
+          "https://images.unsplash.com/",
+
+          'https://wallpaperaccess.com/', // is for wallpaper
+          'https://northeastohiofamilyfun.com/', // is for login page 
+        ],
+        fontSrc: ["'self'", ...fontSrcUrls],
+      }
+    },
     crossOriginEmbedderPolicy: false,
   })
 );
@@ -104,7 +143,8 @@ passport.deserializeUser(User.deserializeUser());
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/tbcamp");
+  //"mongodb://127.0.0.1:27017/tbcamp"
+  await mongoose.connect(dbUrl);
 
   app.use((req, res, next) => {
     res.locals.returnTo = req.session.returnTo;
