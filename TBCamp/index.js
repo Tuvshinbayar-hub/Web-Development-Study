@@ -14,7 +14,7 @@ const passport = require("passport");
 const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
-const dbUrl = process.env.DB_URL;
+const MongoStore = require('connect-mongo');
 
 const campgroundRouter = require("./routes/campgrounds");
 const reviewRouter = require("./routes/reviews");
@@ -22,6 +22,8 @@ const userRouter = require('./routes/users');
 const ExpressError = require("./utils/expressError");
 const User = require('./models/user');
 const app = express();
+
+const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/tbcamp";
 
 app.engine(
   "handlebars",
@@ -69,10 +71,15 @@ app.use(express.static(path.join(__dirname, 'public'), {
     }
   }
 }));
+
 mongoose.set("strictQuery", false);
 
 const sessionConfig = {
-  secret: 'Mojijojo123',
+  store: MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 3600,
+  }),
+  secret: process.env.SECRET || 'justSecret',
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -141,9 +148,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 main().catch((err) => console.log(err));
-
 async function main() {
-  //"mongodb://127.0.0.1:27017/tbcamp"
   await mongoose.connect(dbUrl);
 
   app.use((req, res, next) => {
