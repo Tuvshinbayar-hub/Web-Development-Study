@@ -108,7 +108,6 @@ const scriptSrcUrls = [
 const styleSrcUrls = [
   'https://cdn.jsdelivr.net/',
   'https://unpkg.com/',
-
 ];
 const fontSrcUrls = [];
 

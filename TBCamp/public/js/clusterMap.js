@@ -1,4 +1,5 @@
-const key = "Sxim0MmX1cOFsGNNYJ49";
+const key = process.env.MAPTILER_KEY;
+
 var map = new maplibregl.Map({
     container: 'cluster-map',
     style:
